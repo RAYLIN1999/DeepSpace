@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool GameEnd = false;          //Whether the game wins or loses, the game is end
     [SerializeField] public bool ConversationStart;
     [SerializeField] public bool ConversationOver;
+    [SerializeField] public bool ConversationButtonshowed = false;
 
     [SerializeField] public bool doorButtonshowed = false;   //判定门按钮是否显示
     [SerializeField] public bool doorOpened = false;   //判定门是否开着
@@ -212,6 +213,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Show  start talk button");
 
+        ConversationButtonshowed = true;
         startTalkButton.SetActive(true);
     }
 
@@ -219,6 +221,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("hide talk button");
 
+        ConversationButtonshowed = false;
         startTalkButton.SetActive(false);
     }
 
@@ -257,6 +260,7 @@ public class UIManager : MonoBehaviour
         HideInGameUI();      //隐藏其他界面
         HideStartTalkButton();
         DialogueTrigger.Instance.TriggerDialogue();     //触发对话
+
         TaskTrigger.Instance.TriggerTask(); //触发任务
 
     }
@@ -521,7 +525,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to start conversation or finish conversation
         {
-            if (InGameUIshowed)    //如果谈话按钮显示的话，则可以开始对话
+            if (InGameUIshowed&&ConversationButtonshowed)    //如果谈话按钮显示的话，则可以开始对话
             {
                 StartTalk();
 

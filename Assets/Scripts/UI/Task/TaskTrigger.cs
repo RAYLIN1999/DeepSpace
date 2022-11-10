@@ -20,6 +20,8 @@ public class TaskTrigger : MonoBehaviour
 
     public void TriggerTask()      //start the conversation
     {
+        Debug.Log("trigger the task");
+
         TaskManager.Instance.StartTask(task);
     }
 
