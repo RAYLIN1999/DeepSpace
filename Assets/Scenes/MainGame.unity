@@ -484,16 +484,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4207a14823e50e6438f37b401c727159, type: 2}
-    - target: {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
-      propertyPath: attackTarget
-      value: 
-      objectReference: {fileID: 793164126}
     m_RemovedComponents:
-    - {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
+    - {fileID: 0}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
 --- !u!1 &87431713
@@ -1114,16 +1106,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4207a14823e50e6438f37b401c727159, type: 2}
-    - target: {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
-      propertyPath: attackTarget
-      value: 
-      objectReference: {fileID: 793164126}
     m_RemovedComponents:
-    - {fileID: 3877475142559154848, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
+    - {fileID: 0}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
 --- !u!1 &129459439
@@ -9233,7 +9217,7 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 15
   attackTime: 0
-  HP: 15
+  HP: 20
 --- !u!23 &978575750
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9287,7 +9271,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 2.5}
+  m_Size: {x: 1, y: 2, z: 3.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &978575752
 Rigidbody:
@@ -13317,7 +13301,7 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 15
   attackTime: 0
-  HP: 15
+  HP: 20
 --- !u!195 &1537332850
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13351,7 +13335,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 2.5}
+  m_Size: {x: 1, y: 2, z: 3.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1537332852
 Rigidbody:
