@@ -24,20 +24,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject closeTalkButton;   //Close the conversation
 
 
-    [SerializeField] private GameObject doorButton;
+    [SerializeField] private GameObject doorButton; //Button for opening and closing the door
 
-    [SerializeField] private GameObject repairInfo;
-    [SerializeField] private GameObject backInfo;
+    [SerializeField] private GameObject repairInfo; //Text pop-ups for red facilities
+    [SerializeField] private GameObject backInfo; //Text pop-ups for white facilities
 
-    [SerializeField] private GameObject pickUpOXYGENInfo;
-    [SerializeField] private GameObject pickUp001Info;
-    [SerializeField] private GameObject pickUp002Info;
+    [SerializeField] private GameObject pickUpOXYGENInfo; //Text pop-ups for oxygen tank
+    [SerializeField] private GameObject pickUp001Info; //Text pop-ups for Material 001
+    [SerializeField] private GameObject pickUp002Info; //Text pop-ups for Material 002
 
-    [SerializeField] private GameObject bag001Info;
-    [SerializeField] private GameObject bag002Info;
+    [SerializeField] private GameObject bag001Info; 
+    [SerializeField] private GameObject bag002Info; 
 
-    [SerializeField] private GameObject task9item;
-    [SerializeField] private GameObject task10item;
+    [SerializeField] private GameObject task9item; 
+    [SerializeField] private GameObject task10item; 
     [SerializeField] private GameObject redFacility;
     [SerializeField] private GameObject fixbutton;
     [SerializeField] private GameObject backFacility;
@@ -61,8 +61,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool ConversationOver;
     [SerializeField] public bool ConversationButtonshowed = false;
 
-    [SerializeField] public bool doorButtonshowed = false;   //判定门按钮是否显示
-    [SerializeField] public bool doorOpened = false;   //判定门是否开着
+    [SerializeField] public bool doorButtonshowed = false;   //Determine if the door button is displayed
+    [SerializeField] public bool doorOpened = false;   //Determining whether a door is open or not
 
     [SerializeField] public bool pickUp001 = false;
     [SerializeField] public bool pickUp002 = false;
@@ -71,18 +71,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool facilityFixed = false;
     [SerializeField] public bool couldBack = false;
 
-
-    //  [SerializeField] public bool CompletedTask_1;    //Determining if the task is completed
-    //  [SerializeField] public bool CompletedTask_2;
-    //  [SerializeField] public bool CompletedTask_3;
-    //  [SerializeField] public bool CompletedTask_4;
-    //  [SerializeField] public bool CompletedTask_5;
-    //  [SerializeField] public bool CompletedTask_6;
-    //  [SerializeField] public bool CompletedTask_7;
-    //  [SerializeField] public bool CompletedTask_8;
-    //   [SerializeField] public bool CompletedTask_9;
-    //   [SerializeField] public bool CompletedTask_10;
-    //   [SerializeField] public bool CompletedTask_11;
 
     public void ShowInGameUI()     //display interface
     {
@@ -256,26 +244,26 @@ public class UIManager : MonoBehaviour
     public void StartTalk()   //start conversation, display dialogue interface
     {
         Debug.Log("start Talk");
-        DialogueInterface.SetActive(true);      //展示对话界面
-        HideInGameUI();      //隐藏其他界面
+        DialogueInterface.SetActive(true);      //Show dialogue interface
+        HideInGameUI();      //Hide other interfaces
         HideStartTalkButton();
-        DialogueTrigger.Instance.TriggerDialogue();     //触发对话
+        DialogueTrigger.Instance.TriggerDialogue();     //Trigger conversation
 
-        TaskTrigger.Instance.TriggerTask(); //触发任务
+        TaskTrigger.Instance.TriggerTask(); //Trigger task
 
     }
 
     public void ContinueTalk()   //next sentence
     {
         Debug.Log("Continue to Talk");
-        DialogueManager.Instance.DisplayNextSentence();     //切换到下一段对话
+        DialogueManager.Instance.DisplayNextSentence();     //Switch to the next dialogue
 
     }
 
     public void EndTalk()   //end conversation, hide dialogue interface
     {
         Debug.Log("end Talk");
-        DialogueInterface.SetActive(false);      //隐藏对话界面
+        DialogueInterface.SetActive(false);      //Hide the dialogue interface
         ShowContinueTalkButton();
         HideCloseTalkButton();
         ShowInGameUI();
@@ -435,14 +423,14 @@ public class UIManager : MonoBehaviour
         healthBar.SetHealth(currentHealth);
 
         ConversationOver = DialogueManager.Instance.ConversationOver;
-        if (ConversationOver)     //如果对话结束，那么显示关闭对话按钮
+        if (ConversationOver)     //If the conversation is over, then the close conversation button is displayed
         {
-            HideContinueTalkButton();    //隐藏按钮
-            ShowCloseTalkButton();       //显示按钮
+            HideContinueTalkButton();    //hide continue button
+            ShowCloseTalkButton();       //show close button
         }
         ConversationStart = DialogueManager.Instance.ConversationStart;
 
-        if (doorOpened)    //修改door button的文本
+        if (doorOpened)    //Modify the text of the door button
         {
             doorButtonText.text = "CLOSE";
         }
@@ -525,12 +513,12 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to start conversation or finish conversation
         {
-            if (InGameUIshowed&&ConversationButtonshowed)    //如果谈话按钮显示的话，则可以开始对话
+            if (InGameUIshowed&&ConversationButtonshowed)    //If the Talk button is displayed, a conversation can be started
             {
                 StartTalk();
 
             }
-            else if (!InGameUIshowed && ConversationOver)  //如果谈话结束的话，则可以结束对话
+            else if (!InGameUIshowed && ConversationOver)  //If the conversation is over, then you can end it
             {
                 EndTalk();
             }
@@ -541,16 +529,16 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.C))   //Shortcut keys to Switch to the next dialogue
         {
-            if (!InGameUIshowed && ConversationStart) //如果谈话开始的话，则可以使用按钮
+            if (!InGameUIshowed && ConversationStart) //If the conversation starts then the button can be used
             {
                 ContinueTalk();
             }
 
         }
 
-        if (Input.GetKeyUp(KeyCode.G))   //Shortcut keys to Switch to the next dialogue
+        if (Input.GetKeyUp(KeyCode.G))   //Shortcut keys to open or close the door
         {
-            if (doorButtonshowed) //如果门按钮显示的话，则可以触发
+            if (doorButtonshowed) //If the door button is displayed then it can be triggered
             {
                 if (doorOpened)
                 {

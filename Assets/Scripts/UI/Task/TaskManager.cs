@@ -32,14 +32,14 @@ public class TaskManager : MonoBehaviour
     public void StartTask(Task task)
     {
 
-        sentences.Clear();   //消除之前的任务
+        sentences.Clear();   //Eliminate previous tasks
         //ConversationStart = true;
         //ConversationOver = false;
 
 
-        foreach (string sentence in task.sentences)  //遍历字符串数组中的每个句子
+        foreach (string sentence in task.sentences)  //Iterate over each sentence in the string array
         {
-            sentences.Enqueue(sentence);   //将句子加入到队列中
+            sentences.Enqueue(sentence);   //Adding sentences to the queue
         }
 
         DisplayNextSentence();
@@ -47,13 +47,13 @@ public class TaskManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)   //判定是否已经达到队列的末尾
+        if (sentences.Count == 0)   //Determine if the end of the queue has been reached
         {
             EndTask();
             return;
         }
 
-        string sentence = sentences.Dequeue();   //调用队列中的下一个句子
+        string sentence = sentences.Dequeue();   //Calling the next sentence in the queue
         Debug.Log("next task");
         task_1_Text.text = sentence;
         task_2_Text.text = sentence;

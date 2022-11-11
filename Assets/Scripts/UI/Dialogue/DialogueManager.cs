@@ -33,14 +33,14 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log("Starting conversation with "+ dialogue.name);
         nameText.text = dialogue.name;
 
-        sentences.Clear();   //消除之前的对话
+        sentences.Clear();   //Eliminate previous conversations
         ConversationStart = true;
         ConversationOver = false;
 
 
-        foreach (string sentence in dialogue.sentences)  //遍历字符串数组中的每个句子
+        foreach (string sentence in dialogue.sentences)  //Iterate over each sentence in the string array
         {
-            sentences.Enqueue(sentence);   //将句子加入到队列中
+            sentences.Enqueue(sentence);   //Adding sentences to the queue
         }
 
         DisplayNextSentence();
@@ -48,13 +48,13 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)   //判定是否已经达到队列的末尾
+        if(sentences.Count == 0)   //Determine if the end of the queue has been reached
         {
             EndDialogue();
             return;
         }
 
-        string sentence = sentences.Dequeue();   //调用队列中的下一个句子
+        string sentence = sentences.Dequeue();   //Calling the next sentence in the queue
         dialogueText.text = sentence;
     }
 
