@@ -72,18 +72,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool couldBack = false;
 
 
-    public void ShowInGameUI()     //display interface
+    public void ShowInGameUI()     //display in game interface, hide the menu
     {
         Debug.Log("Show InGameUI");
         InGameUIshowed = true;
         InGameUI.SetActive(true);
+        Time.timeScale = 1;                           //Continue the game
+        Cursor.lockState = CursorLockMode.Locked;     //Lock the cursor again
     }
 
-    public void HideInGameUI()    //hide interface
+    public void HideInGameUI()    //hide in game interface, show the menu
     {
         Debug.Log("Hide InGameUI");
         InGameUIshowed = false;
         InGameUI.SetActive(false);
+        Time.timeScale = 0;                         //Pause the game
+        Cursor.lockState = CursorLockMode.None;     //Allows button clicks with the cursor
     }
 
     public void ShowPauseMenu()   //display interface
@@ -458,14 +462,12 @@ public class UIManager : MonoBehaviour
             if (PauseMenuShowed && !InGameUIshowed)   //It can only be triggered when the  pause menu interface is displayed
             {
                 HidePauseMenu();
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Locked;
+
             }
             else if (!PauseMenuShowed && InGameUIshowed)
             {
                 ShowPauseMenu();
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
+                
             }
         }
 
