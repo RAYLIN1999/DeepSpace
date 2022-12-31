@@ -458,10 +458,14 @@ public class UIManager : MonoBehaviour
             if (PauseMenuShowed && !InGameUIshowed)   //It can only be triggered when the  pause menu interface is displayed
             {
                 HidePauseMenu();
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else if (!PauseMenuShowed && InGameUIshowed)
             {
                 ShowPauseMenu();
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
 
