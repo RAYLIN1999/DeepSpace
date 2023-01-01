@@ -129,6 +129,7 @@ public class UIManager : MonoBehaviour
         HideInGameUI();
         BagMenuShowed = true;
         BagMenu.SetActive(true);
+        BagManager.Instance.Initialise_BagMenu();
     }
 
     public void HideBagMenu()   //hide interface
@@ -137,6 +138,7 @@ public class UIManager : MonoBehaviour
         ShowInGameUI();
         BagMenuShowed = false;
         BagMenu.SetActive(false);
+        BagManager.Instance.Initialise_BagMenu();
     }
 
     public void ShowGameOverDead()   //display interface
