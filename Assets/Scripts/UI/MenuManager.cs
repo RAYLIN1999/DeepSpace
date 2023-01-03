@@ -37,4 +37,9 @@ public class MenuManager : MonoBehaviour
         //Cursor.lockState = CursorLockMode.None;
 
     }
+
+    void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;     //Allows button clicks with the cursor
+    }
 }

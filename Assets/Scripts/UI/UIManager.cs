@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject PauseMenu;   //pause menu interface
     [SerializeField] private GameObject BagMenu;     //bag menu interface
 
+    [SerializeField] private GameObject Facility_02_Panel;     //Upgrade System Interface
+
     [SerializeField] private GameObject GameOverDead;  //game over interface, Player dies , with zero health or oxygen
     [SerializeField] private GameObject GameOverLose;  //game over interface, Player lose the game
     [SerializeField] private GameObject GameOverWin;  //game over interface, Player win the game
@@ -22,12 +24,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject startTalkButton;    //Start a conversation
     [SerializeField] private GameObject continueTalkButton;  //Switch to the next conversation
     [SerializeField] private GameObject closeTalkButton;   //Close the conversation
+    [SerializeField] private GameObject interactButton;   //click button to interact with the object
 
 
     [SerializeField] private GameObject doorButton; //Button for opening and closing the door
 
-    [SerializeField] private GameObject repairInfo; //Text pop-ups for red facilities
-    [SerializeField] private GameObject backInfo; //Text pop-ups for white facilities
+    //[SerializeField] private GameObject CSH_Damage_Area_01;     //Current Status Hint text pop-ups triggered when approaching this object in area 01
+    //[SerializeField] private GameObject CSH_Normal_Area_01;
+
+    [SerializeField] private GameObject CSH_Damage_Area_02;     //Current Status Hint text pop-ups triggered when approaching this object in area 02
+    [SerializeField] private GameObject CSH_Normal_Area_02;
+
+    //[SerializeField] private GameObject CSH_Damage_Area_03;     //Current Status Hint text pop-ups triggered when approaching this object in area 03
+    //[SerializeField] private GameObject CSH_Normal_Area_03;
+
 
     [SerializeField] private GameObject pickUpOXYGENInfo; //Text pop-ups for oxygen tank
     [SerializeField] private GameObject pickUp001Info; //Text pop-ups for Material 001
@@ -39,7 +49,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject task9item; 
     [SerializeField] private GameObject task10item; 
     [SerializeField] private GameObject redFacility;
-    [SerializeField] private GameObject fixbutton;
+
     [SerializeField] private GameObject backFacility;
 
 
@@ -47,6 +57,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text OxygenPoint;    //Text display of oxygen value
     [SerializeField] private TMP_Text doorButtonText;    //open or close
 
+    [SerializeField] private TMP_Text item_004_amount;
 
     public HealthBar healthBar; //Reference script HealthBar.cs
     [SerializeField] public int currentHealth;
@@ -141,6 +152,24 @@ public class UIManager : MonoBehaviour
         BagManager.Instance.Initialise_BagMenu();
     }
 
+    public void Show_Facility_02_Panel()   //display interface
+    {
+        Debug.Log("Show Upgrade System Interface");
+        HideInGameUI();
+
+        Facility_02_Panel.SetActive(true);
+        
+    }
+
+    public void Hide_Facility_02_Panel()   //hide interface
+    {
+        Debug.Log("Hide Upgrade System Interface");
+        ShowInGameUI();
+        Facility_02_Panel.SetActive(false);
+        
+    }
+
+
     public void ShowGameOverDead()   //display interface
     {
         Debug.Log("Show GameOverDead");
@@ -193,6 +222,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Back to Main Menu");
         HidePauseMenu();
+        
         SceneManager.LoadScene(0);
     }
 
@@ -201,6 +231,20 @@ public class UIManager : MonoBehaviour
         Debug.Log("Replay Game");
         HidePauseMenu();
         SceneManager.LoadScene(3);
+    }
+
+    public void ShowInteractButton()   //display button
+    {
+        Debug.Log("Show Interact button");
+
+        interactButton.SetActive(true);
+    }
+
+    public void HideInteractButton()   //hide button
+    {
+        Debug.Log("hide Interact button");
+
+        interactButton.SetActive(false);
     }
 
     public void ShowStartTalkButton()   //display button
@@ -304,41 +348,41 @@ public class UIManager : MonoBehaviour
         Door.Instance.showDoor1();
     }
 
-    public void ShowRepairInfo()   //display info
+    public void ShowCurrentStatusHint()   //show the current status hint of this game object
     {
-        Debug.Log("Show repair information");
+        Debug.Log("Show the current status hint");
 
-        repairInfo.SetActive(true);
+        if (!GameManager.Instance.Area_02_unlocked)
+        {
+            CSH_Damage_Area_02.SetActive(true);
+            CSH_Normal_Area_02.SetActive(false);
+        }
+        else
+        {
+            CSH_Damage_Area_02.SetActive(false);
+            CSH_Normal_Area_02.SetActive(true);
+            ShowInteractButton();
+        }
+
     }
 
-    public void HideRepairInfo()   //hide info
+    public void HideCurrentStatusHint()   //hide the current status hint of this game object
     {
-        Debug.Log("hide repair information");
+        Debug.Log("hide the current status hint");
 
-        repairInfo.SetActive(false);
+        if (!GameManager.Instance.Area_02_unlocked)
+        {
+            CSH_Damage_Area_02.SetActive(false);
+            CSH_Normal_Area_02.SetActive(false);
+        }
+        else
+        {
+            CSH_Damage_Area_02.SetActive(false);
+            CSH_Normal_Area_02.SetActive(false);
+            HideInteractButton();
+        }
     }
 
-    public void FixRedFacility()   //fix the red facility
-    {
-        Debug.Log("fix the red facility");
-
-        redFacility.SetActive(false);
-        repairInfo.SetActive(false) ;
-    }
-
-    public void ShowBackInfo()   //display info
-    {
-        Debug.Log("Show back information");
-
-        backInfo.SetActive(true);
-    }
-
-    public void HideBackInfo()   //hide info
-    {
-        Debug.Log("hide back information");
-
-        backInfo.SetActive(false);
-    }
 
     public void ShowpickUpOXYGENInfo()   //display info
     {
@@ -445,13 +489,6 @@ public class UIManager : MonoBehaviour
             doorButtonText.text = "OPEN";
         }
 
-        if (pickUp001 && pickUp002)
-        {
-            task9item.SetActive(true);
-            task10item.SetActive(true);
-            backFacility.SetActive(true);
-            fixbutton.SetActive(true);
-        }
 
         if (Player.Instance.IsDead || currentOxygen == 0)
         {
@@ -519,8 +556,18 @@ public class UIManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to start conversation or finish conversation
+        if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to interact with the facility
         {
+            if(InGameUIshowed && ShipAITrigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
+                                                                         //Interaction can only take place when the player is in range
+            {
+                if (GameManager.Instance.Area_02_unlocked)
+                {
+                     Show_Facility_02_Panel();
+                }
+                
+            }
+
             if (InGameUIshowed&&ConversationButtonshowed)    //If the Talk button is displayed, a conversation can be started
             {
                 StartTalk();
@@ -560,55 +607,5 @@ public class UIManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.I))   //Shortcut keys to pick up oxygen tank
-        {
-            if (!pickUpox) //
-            {
-                pickUpOXYGEN();
-            }
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.U))   //Shortcut keys to pick up ITEM 001
-        {
-            if (!pickUp001) //
-            {
-                pickUpitem001();
-            }
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.H))   //Shortcut keys to pick up item 002
-        {
-            if (!pickUp002) //
-            {
-                pickUpitem002();
-            }
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.Z))   //Shortcut keys to pick up oxygen tank
-        {
-            if (!facilityFixed) //
-            {
-                FixRedFacility();
-                facilityFixed = true;
-                couldBack = true;
-            }
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))   //Shortcut keys to pick up oxygen tank
-        {
-            if (couldBack) //
-            {
-                ShowGameOverWin();
-            }
-            else
-            {
-                ShowGameOverLose();
-            }
-
-        }
     }
 }
