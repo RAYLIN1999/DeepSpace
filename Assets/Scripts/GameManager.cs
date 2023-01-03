@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+
     [SerializeField] public bool Area_01_unlocked = false;    //Determine if the area is unlocked
     [SerializeField] public bool Area_02_unlocked = false;
     [SerializeField] public bool Area_03_unlocked = false;
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool EnergryRefilled = false;    //Determine if the energy is refilled
 
-    [SerializeField] public bool Trigger_Area_02 = false;    //Determine if this trigger is in range
+    [SerializeField] public bool Trigger_Area_01 = false;    //Determine if this trigger is in range
+    [SerializeField] public bool Trigger_Area_02 = false;
     [SerializeField] public bool Trigger_Area_03 = false;
     [SerializeField] public bool Trigger_Area_05 = false;
 
@@ -51,6 +53,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Area_01_unlock()     //unlock the area 01
+    {
+        Debug.Log("unlock the area 01");
+        Area_01_unlocked = true;
+    }
+
+    public void Area_02_unlock()     //unlock the area 02
+    {
+        Debug.Log("unlock the area 02");
+        Area_02_unlocked = true;
+    }
+
+    public void Area_03_unlock()     //unlock the area 03
+    {
+        Debug.Log("unlock the area 03");
+        Area_03_unlocked = true;
     }
 
     public void Upgrade_1_2_Equipment()     //Perform equipment upgrades - oxygen+
@@ -83,11 +103,24 @@ public class GameManager : MonoBehaviour
         EnergryRefilled = true;
     }
 
+    public void PickUp_01_Item()     //pick up item 001
+    {
+        Debug.Log("pick up a halth potion");
+        item_001_amount += item_001_amount;
+    }
+
+    public void PickUp_02_Item()     //pick up item 002
+    {
+        Debug.Log("pick up an oxygen tank");
+        item_002_amount += item_002_amount;
+    }
+
     void Update()
     {
         Trigger_Area_02 = Area_02_Trigger.Instance.couldInteract;
         Trigger_Area_03 = Area_03_Trigger.Instance.couldInteract;
         Trigger_Area_05 = Area_05_Trigger.Instance.couldInteract;
+
     }
 
 }

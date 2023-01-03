@@ -28,12 +28,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject continueTalkButton;  //Switch to the next conversation
     [SerializeField] private GameObject closeTalkButton;   //Close the conversation
     [SerializeField] private GameObject interactButton;   //click button to interact with the object
+    [SerializeField] private GameObject pickUpButton;   //click button to pick up the object
 
 
     [SerializeField] private GameObject doorButton; //Button for opening and closing the door
 
-    //[SerializeField] private GameObject CSH_Damage_Area_01;     //Current Status Hint text pop-ups triggered when approaching this object in area 01
-    //[SerializeField] private GameObject CSH_Normal_Area_01;
+    [SerializeField] private GameObject CSH_Damage_Area_01;     //Current Status Hint text pop-ups triggered when approaching this object in area 01
+    [SerializeField] private GameObject Door_area_01;
 
     [SerializeField] private GameObject CSH_Damage_Area_02;     //Current Status Hint text pop-ups triggered when approaching this object in area 02
     [SerializeField] private GameObject CSH_Normal_Area_02;
@@ -83,6 +84,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool pickUp001 = false;
     [SerializeField] public bool pickUp002 = false;
     [SerializeField] public bool pickUpox = false;
+    [SerializeField] public bool couldPickUp = false;
 
     [SerializeField] public bool facilityFixed = false;
     [SerializeField] public bool couldBack = false;
@@ -286,6 +288,20 @@ public class UIManager : MonoBehaviour
         interactButton.SetActive(false);
     }
 
+    public void ShowPickUpButton()   //display button
+    {
+        Debug.Log("Show Pick Up button");
+
+        pickUpButton.SetActive(true);
+    }
+
+    public void HidePickUpButton()   //hide button
+    {
+        Debug.Log("hide Pick Up button");
+
+        pickUpButton.SetActive(false);
+    }
+
     public void ShowStartTalkButton()   //display button
     {
         Debug.Log("Show  start talk button");
@@ -387,9 +403,25 @@ public class UIManager : MonoBehaviour
         Door.Instance.showDoor1();
     }
 
+    public void ShowCurrentStatusHint_Area_01_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint area 01");
+
+        CSH_Damage_Area_01.SetActive(true);
+
+    }
+
+    public void HideCurrentStatusHint_Area_01_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint area 01");
+
+        CSH_Damage_Area_01.SetActive(false);
+
+    }
+
     public void ShowCurrentStatusHint_Area_02_Trigger()   //show the current status hint of this game object
     {
-        Debug.Log("Show the current status hint");
+        Debug.Log("Show the current status hint area 02");
 
             if (!GameManager.Instance.Area_02_unlocked )
             {
@@ -406,7 +438,7 @@ public class UIManager : MonoBehaviour
 
     public void HideCurrentStatusHint_Area_02_Trigger()   //hide the current status hint of this game object
     {
-        Debug.Log("hide the current status hint");
+        Debug.Log("hide the current status hint area 02");
 
         if (!GameManager.Instance.Area_02_unlocked)
         {
@@ -423,7 +455,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowCurrentStatusHint_Area_03_Trigger()   //show the current status hint of this game object
     {
-        Debug.Log("Show the current status hint");
+        Debug.Log("Show the current status hint area 03");
 
         if (!GameManager.Instance.Area_03_unlocked)
         {
@@ -440,7 +472,7 @@ public class UIManager : MonoBehaviour
 
     public void HideCurrentStatusHint_Area_03_Trigger()   //hide the current status hint of this game object
     {
-        Debug.Log("hide the current status hint");
+        Debug.Log("hide the current status hint area 03");
 
         if (!GameManager.Instance.Area_03_unlocked)
         {
@@ -457,7 +489,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowCurrentStatusHint_Area_05_Trigger()   //show the current status hint of this game object
     {
-        Debug.Log("Show the current status hint");
+        Debug.Log("Show the current status hint area 05");
 
             CSH_Normal_Area_05.SetActive(true);
             ShowInteractButton();
@@ -466,7 +498,7 @@ public class UIManager : MonoBehaviour
 
     public void HideCurrentStatusHint_Area_05_Trigger()   //hide the current status hint of this game object
     {
-        Debug.Log("hide the current status hint");
+        Debug.Log("hide the current status hint area 05");
 
             CSH_Normal_Area_05.SetActive(false);
             HideInteractButton();
@@ -579,6 +611,13 @@ public class UIManager : MonoBehaviour
             doorButtonText.text = "OPEN";
         }
 
+        if (GameManager.Instance.Area_01_unlocked)
+        {
+            Door_area_01.SetActive(false);
+        } else
+        {
+            Door_area_01.SetActive(true);
+        }
 
         if (Player.Instance.IsDead || currentOxygen == 0)
         {
@@ -648,7 +687,14 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to interact with the facility
         {
-            if(InGameUIshowed && Area_02_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
+            if (PickUp_02_item.Instance.couldInteract)
+            {
+
+                PickUp_02_item.Instance.pickupOxygentank();
+              
+            }
+
+            if (InGameUIshowed && Area_02_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
                                                                          //Interaction can only take place when the player is in range
             {
                 if (GameManager.Instance.Area_02_unlocked)

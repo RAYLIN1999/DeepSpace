@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Area_01_Trigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Area_01_Trigger Instance; //Instantiating the Area_01_Trigger.cs
+
+    [SerializeField] public bool couldInteract = false;
+
+    void Awake()
     {
-        
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void OnTriggerEnter(Collider other)     //Enter the range of this object
+
     {
-        
+        couldInteract = true; //Interaction can only take place when the player is in range
+        UIManager.Instance.ShowCurrentStatusHint_Area_01_Trigger();
+    }
+
+    public void OnTriggerExit(Collider other) //Leave the range of this object
+    {
+        couldInteract = false;
+        UIManager.Instance.HideCurrentStatusHint_Area_01_Trigger();
     }
 }
