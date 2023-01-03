@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject BagMenu;     //bag menu interface
 
     [SerializeField] private GameObject Facility_02_Panel;     //Upgrade System Interface
+    [SerializeField] private GameObject Facility_03_Panel;     //Energy System Interface
+
+    [SerializeField] private GameObject Facility_05_Panel;     //Portal Facility Interface
 
     [SerializeField] private GameObject GameOverDead;  //game over interface, Player dies , with zero health or oxygen
     [SerializeField] private GameObject GameOverLose;  //game over interface, Player lose the game
@@ -35,8 +38,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject CSH_Damage_Area_02;     //Current Status Hint text pop-ups triggered when approaching this object in area 02
     [SerializeField] private GameObject CSH_Normal_Area_02;
 
-    //[SerializeField] private GameObject CSH_Damage_Area_03;     //Current Status Hint text pop-ups triggered when approaching this object in area 03
-    //[SerializeField] private GameObject CSH_Normal_Area_03;
+    [SerializeField] private GameObject CSH_Damage_Area_03;     //Current Status Hint text pop-ups triggered when approaching this object in area 03
+    [SerializeField] private GameObject CSH_Normal_Area_03;
+
+    [SerializeField] private GameObject CSH_Normal_Area_05;     //Current Status Hint text pop-ups triggered when approaching this object in area 05
 
 
     [SerializeField] private GameObject pickUpOXYGENInfo; //Text pop-ups for oxygen tank
@@ -167,6 +172,40 @@ public class UIManager : MonoBehaviour
         ShowInGameUI();
         Facility_02_Panel.SetActive(false);
         
+    }
+
+    public void Show_Facility_03_Panel()   //display interface
+    {
+        Debug.Log("Show Energy System Interface");
+        HideInGameUI();
+
+        Facility_03_Panel.SetActive(true);
+
+    }
+
+    public void Hide_Facility_03_Panel()   //hide interface
+    {
+        Debug.Log("Hide Energy System Interface");
+        ShowInGameUI();
+        Facility_03_Panel.SetActive(false);
+
+    }
+
+    public void Show_Facility_05_Panel()   //display interface
+    {
+        Debug.Log("Show Portal Facility Interface");
+        HideInGameUI();
+
+        Facility_05_Panel.SetActive(true);
+
+    }
+
+    public void Hide_Facility_05_Panel()   //hide interface
+    {
+        Debug.Log("Hide Portal Facility Interface");
+        ShowInGameUI();
+        Facility_05_Panel.SetActive(false);
+
     }
 
 
@@ -348,25 +387,24 @@ public class UIManager : MonoBehaviour
         Door.Instance.showDoor1();
     }
 
-    public void ShowCurrentStatusHint()   //show the current status hint of this game object
+    public void ShowCurrentStatusHint_Area_02_Trigger()   //show the current status hint of this game object
     {
         Debug.Log("Show the current status hint");
 
-        if (!GameManager.Instance.Area_02_unlocked)
-        {
-            CSH_Damage_Area_02.SetActive(true);
-            CSH_Normal_Area_02.SetActive(false);
-        }
-        else
-        {
-            CSH_Damage_Area_02.SetActive(false);
-            CSH_Normal_Area_02.SetActive(true);
-            ShowInteractButton();
-        }
-
+            if (!GameManager.Instance.Area_02_unlocked )
+            {
+                    CSH_Damage_Area_02.SetActive(true);
+                    CSH_Normal_Area_02.SetActive(false);                
+            }
+            else
+            {
+                    CSH_Damage_Area_02.SetActive(false);
+                    CSH_Normal_Area_02.SetActive(true);
+                    ShowInteractButton();           
+            }
     }
 
-    public void HideCurrentStatusHint()   //hide the current status hint of this game object
+    public void HideCurrentStatusHint_Area_02_Trigger()   //hide the current status hint of this game object
     {
         Debug.Log("hide the current status hint");
 
@@ -381,6 +419,58 @@ public class UIManager : MonoBehaviour
             CSH_Normal_Area_02.SetActive(false);
             HideInteractButton();
         }
+    }
+
+    public void ShowCurrentStatusHint_Area_03_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint");
+
+        if (!GameManager.Instance.Area_03_unlocked)
+        {
+            CSH_Damage_Area_03.SetActive(true);
+            CSH_Normal_Area_03.SetActive(false);
+        }
+        else
+        {
+            CSH_Damage_Area_03.SetActive(false);
+            CSH_Normal_Area_03.SetActive(true);
+            ShowInteractButton();
+        }
+    }
+
+    public void HideCurrentStatusHint_Area_03_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint");
+
+        if (!GameManager.Instance.Area_03_unlocked)
+        {
+            CSH_Damage_Area_03.SetActive(false);
+            CSH_Normal_Area_03.SetActive(false);
+        }
+        else
+        {
+            CSH_Damage_Area_03.SetActive(false);
+            CSH_Normal_Area_03.SetActive(false);
+            HideInteractButton();
+        }
+    }
+
+    public void ShowCurrentStatusHint_Area_05_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint");
+
+            CSH_Normal_Area_05.SetActive(true);
+            ShowInteractButton();
+
+    }
+
+    public void HideCurrentStatusHint_Area_05_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint");
+
+            CSH_Normal_Area_05.SetActive(false);
+            HideInteractButton();
+
     }
 
 
@@ -558,14 +648,28 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.F))   //Shortcut keys to interact with the facility
         {
-            if(InGameUIshowed && ShipAITrigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
+            if(InGameUIshowed && Area_02_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
                                                                          //Interaction can only take place when the player is in range
             {
                 if (GameManager.Instance.Area_02_unlocked)
                 {
                      Show_Facility_02_Panel();
+                }         
+            }
+
+            if (InGameUIshowed && Area_03_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 3
+                                                                            //Interaction can only take place when the player is in range
+            {
+                if (GameManager.Instance.Area_03_unlocked)
+                {
+                    Show_Facility_03_Panel();
                 }
-                
+            }
+
+            if (InGameUIshowed && Area_05_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 5
+                                                                            //Interaction can only take place when the player is in range
+            {
+                    Show_Facility_05_Panel(); 
             }
 
             if (InGameUIshowed&&ConversationButtonshowed)    //If the Talk button is displayed, a conversation can be started

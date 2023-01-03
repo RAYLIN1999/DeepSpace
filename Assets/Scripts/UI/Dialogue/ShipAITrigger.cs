@@ -21,13 +21,13 @@ public class ShipAITrigger : MonoBehaviour
 
     {
         couldInteract = true;      //Interaction can only take place when the player is in range
-        UIManager.Instance.ShowCurrentStatusHint();
+        UIManager.Instance.ShowCurrentStatusHint_Area_02_Trigger();
     }
 
     public void OnTriggerExit(Collider other) //Hide hint interface and button when not triggered
     {
         couldInteract = false;
-        UIManager.Instance.HideCurrentStatusHint();
+        UIManager.Instance.HideCurrentStatusHint_Area_02_Trigger();
     }
 
 

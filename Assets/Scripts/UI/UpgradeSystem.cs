@@ -11,8 +11,6 @@ public class UpgradeSystem : MonoBehaviour
 
     public static UpgradeSystem Instance; //Instantiating the UpgradeSystem.cs
 
-    
-
     [SerializeField] private GameObject category_1_2;          //Content of the category oxygen+
     [SerializeField] private GameObject category_1_3;          //Content of the category health+
     [SerializeField] private GameObject category_2_3;          //Content of the category Ammunition+
@@ -20,6 +18,10 @@ public class UpgradeSystem : MonoBehaviour
     [SerializeField] private GameObject button_1_2;          //upgrade button of the category oxygen+
     [SerializeField] private GameObject button_1_3;          //upgrade button of the category health+
     [SerializeField] private GameObject button_2_3;          //upgrade button of the category Ammunition+
+
+    [SerializeField] private int item_004_a;
+    [SerializeField] private int item_005_a;
+    [SerializeField] private int item_006_a;
 
     [SerializeField] private Button button_Oxygen;  //button oxygen_button
 
@@ -37,23 +39,41 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Upgrade_1_2_Equipment()     //Perform equipment upgrades - oxygen+
     {
-        Debug.Log("upgrades - oxygen+");
+        if(item_004_a >= 1 && item_005_a >= 1)
+        {
+            Debug.Log("upgrades - oxygen+");
+            GameManager.Instance.Upgrade_1_2_Equipment();
+        } else
+        {
+            Debug.Log("cannot upgrade");
+        }
         
-        GameManager.Instance.Upgrade_1_2_Equipment();
     }
 
     public void Upgrade_1_3_Equipment()     //Perform equipment upgrades - health+
     {
-        Debug.Log("upgrades - health+");
-
-        GameManager.Instance.Upgrade_1_3_Equipment();
+        if (item_004_a >= 1 && item_006_a >= 1)
+        {
+            Debug.Log("upgrades - health+");
+            GameManager.Instance.Upgrade_1_3_Equipment();
+        }
+        else
+        {
+            Debug.Log("cannot upgrade");
+        }
     }
 
     public void Upgrade_2_3_Equipment()     //Perform equipment upgrades - Ammunition+
     {
-        Debug.Log("upgrades - Ammunition+");
-
-        GameManager.Instance.Upgrade_2_3_Equipment();
+        if (item_005_a >= 1 && item_006_a >= 1)
+        {
+            Debug.Log("upgrades - Ammunition+");
+            GameManager.Instance.Upgrade_2_3_Equipment();
+        }
+        else
+        {
+            Debug.Log("cannot upgrade");
+        }
     }
 
 
@@ -94,6 +114,10 @@ public class UpgradeSystem : MonoBehaviour
 
     void Update()
     {
+        item_004_a = GameManager.Instance.item_004_amount;       //get value from gamemanager.cs
+        item_005_a = GameManager.Instance.item_005_amount;
+        item_006_a = GameManager.Instance.item_006_amount;
+
         if (GameManager.Instance.Equipment_01_Upgrades) //If the equipment has not been upgraded, the button is displayed
         {
             button_1_2.SetActive(false);        //hide the button
