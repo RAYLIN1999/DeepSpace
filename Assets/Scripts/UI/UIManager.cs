@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance; //Instantiating the MenuManager.cs
 
     [SerializeField] private GameObject InGameUI;    //The normal interface display of the game running
-    [SerializeField] private GameObject TaskMenu;    //task menu interface
+    [SerializeField] private GameObject TasksMenu;    //task menu interface
     [SerializeField] private GameObject PauseMenu;   //pause menu interface
     [SerializeField] private GameObject BagMenu;     //bag menu interface
 
@@ -102,7 +102,9 @@ public class UIManager : MonoBehaviour
         Debug.Log("Show TaskMenu");
         HideInGameUI();
         TaskMenuShowed = true;
-        TaskMenu.SetActive(true);
+        TasksMenu.SetActive(true);
+        TaskMenu.Instance.show_01_content();
+        
     }
 
     public void HideTaskMenu()  //hide interface
@@ -110,7 +112,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide TaskMenu");
         ShowInGameUI();
         TaskMenuShowed = false;
-        TaskMenu.SetActive(false);
+        TasksMenu.SetActive(false);
+        TaskMenu.Instance.show_01_content();
     }
 
     public void HidePauseMenu()   //hide interface
