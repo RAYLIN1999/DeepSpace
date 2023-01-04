@@ -16,12 +16,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject Facility_02_Panel;     //Upgrade System Interface
     [SerializeField] private GameObject Facility_03_Panel;     //Energy System Interface
-
+    [SerializeField] private GameObject Facility_04_Panel;     //Spaceship AI Interface
     [SerializeField] private GameObject Facility_05_Panel;     //Portal Facility Interface
 
     [SerializeField] private GameObject GameOverDead;  //game over interface, Player dies , with zero health or oxygen
-    [SerializeField] private GameObject GameOverLose;  //game over interface, Player lose the game
-    [SerializeField] private GameObject GameOverWin;  //game over interface, Player win the game
+    [SerializeField] private GameObject GameOverWin_past;  //game over interface, Player win the game, back to the past
+    [SerializeField] private GameObject GameOverWin_earth;  //game over interface, Player win the game, back to the earth
 
     [SerializeField] private GameObject DialogueInterface;  //dialogue interface
     [SerializeField] private GameObject startTalkButton;    //Start a conversation
@@ -42,21 +42,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject CSH_Damage_Area_03;     //Current Status Hint text pop-ups triggered when approaching this object in area 03
     [SerializeField] private GameObject CSH_Normal_Area_03;
 
+    [SerializeField] private GameObject CSH_Normal_Area_04;     //Current Status Hint text pop-ups triggered when approaching this object in area 05
+
     [SerializeField] private GameObject CSH_Normal_Area_05;     //Current Status Hint text pop-ups triggered when approaching this object in area 05
-
-
-    [SerializeField] private GameObject pickUpOXYGENInfo; //Text pop-ups for oxygen tank
-    [SerializeField] private GameObject pickUp001Info; //Text pop-ups for Material 001
-    [SerializeField] private GameObject pickUp002Info; //Text pop-ups for Material 002
-
-    [SerializeField] private GameObject bag001Info; 
-    [SerializeField] private GameObject bag002Info; 
-
-    [SerializeField] private GameObject task9item; 
-    [SerializeField] private GameObject task10item; 
-    [SerializeField] private GameObject redFacility;
-
-    [SerializeField] private GameObject backFacility;
 
 
     [SerializeField] private TMP_Text HealthPoint;    //Text display of health value
@@ -81,13 +69,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool doorButtonshowed = false;   //Determine if the door button is displayed
     [SerializeField] public bool doorOpened = false;   //Determining whether a door is open or not
 
-    [SerializeField] public bool pickUp001 = false;
-    [SerializeField] public bool pickUp002 = false;
-    [SerializeField] public bool pickUpox = false;
-    [SerializeField] public bool couldPickUp = false;
-
-    [SerializeField] public bool facilityFixed = false;
-    [SerializeField] public bool couldBack = false;
 
 
     public void ShowInGameUI()     //display in game interface, hide the menu
@@ -165,6 +146,7 @@ public class UIManager : MonoBehaviour
         HideInGameUI();
 
         Facility_02_Panel.SetActive(true);
+        HideInteractButton();
         
     }
 
@@ -173,7 +155,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide Upgrade System Interface");
         ShowInGameUI();
         Facility_02_Panel.SetActive(false);
-        
+        ShowInteractButton();
     }
 
     public void Show_Facility_03_Panel()   //display interface
@@ -182,6 +164,7 @@ public class UIManager : MonoBehaviour
         HideInGameUI();
 
         Facility_03_Panel.SetActive(true);
+        HideInteractButton();
 
     }
 
@@ -190,7 +173,24 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide Energy System Interface");
         ShowInGameUI();
         Facility_03_Panel.SetActive(false);
+        ShowInteractButton();
+    }
+    public void Show_Facility_04_Panel()   //display interface
+    {
+        Debug.Log("Show SpaceAI Interface");
+        HideInGameUI();
 
+        Facility_04_Panel.SetActive(true);
+        HideInteractButton();
+    }
+
+    public void Hide_Facility_04_Panel()   //hide interface
+    {
+        Debug.Log("Hide SpaceAI Interface");
+        ShowInGameUI();
+        Facility_04_Panel.SetActive(false);
+        ShowInteractButton();
+        SpaceShipAI.Instance.turn_to_01_page();
     }
 
     public void Show_Facility_05_Panel()   //display interface
@@ -199,7 +199,7 @@ public class UIManager : MonoBehaviour
         HideInGameUI();
 
         Facility_05_Panel.SetActive(true);
-
+        HideInteractButton();
     }
 
     public void Hide_Facility_05_Panel()   //hide interface
@@ -207,7 +207,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide Portal Facility Interface");
         ShowInGameUI();
         Facility_05_Panel.SetActive(false);
-
+        ShowInteractButton();
     }
 
 
@@ -227,28 +227,28 @@ public class UIManager : MonoBehaviour
         GameOverDead.SetActive(false);
     }
 
-    public void ShowGameOverLose()   //display interface
+    public void ShowGameOverWin_Past()   //display interface
     {
-        Debug.Log("Show GameOverLose");
+        Debug.Log("Show GameOverWin_Past");
         HideInGameUI();
         GameEnd = true;
-        GameOverLose.SetActive(true);
+        GameOverWin_past.SetActive(true);
     }
 
-    public void HideGameOverLose()   //hide interface
+    public void HideGameOverWin_Past()   //hide interface
     {
         Debug.Log("Hide GameOverLose");
         ShowInGameUI();
         GameEnd = false;
-        GameOverLose.SetActive(false);
+        GameOverWin_past.SetActive(false);
     }
 
-    public void ShowGameOverWin()   //display interface
+    public void ShowGameOverWin_Earth()   //display interface
     {
-        Debug.Log("Show GameOverWin");
+        Debug.Log("Show GameOverWin_Earth");
         HideInGameUI();
         GameEnd = true;
-        GameOverWin.SetActive(true);
+        GameOverWin_earth.SetActive(true);
     }
 
     public void HideGameOverWin()   //hide interface
@@ -256,7 +256,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide GameOverWin");
         ShowInGameUI();
         GameEnd = false;
-        GameOverWin.SetActive(false);
+        GameOverWin_earth.SetActive(false);
     }
 
     public void BackToMainMenu()   //turn to scene 'mainmenu'
@@ -487,6 +487,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowCurrentStatusHint_Area_04_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint area 04");
+
+        CSH_Normal_Area_04.SetActive(true);
+        ShowInteractButton();
+
+    }
+
+    public void HideCurrentStatusHint_Area_04_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint area 04");
+
+        CSH_Normal_Area_04.SetActive(false);
+        HideInteractButton();
+
+    }
+
     public void ShowCurrentStatusHint_Area_05_Trigger()   //show the current status hint of this game object
     {
         Debug.Log("Show the current status hint area 05");
@@ -505,74 +523,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-
-    public void ShowpickUpOXYGENInfo()   //display info
-    {
-        Debug.Log("Show pickUpOXYGEN information");
-
-        pickUpOXYGENInfo.SetActive(true);
-    }
-
-    public void HidepickUpOXYGENInfo()   //hide info
-    {
-        Debug.Log("hide pickUpOXYGEN information");
-
-        pickUpOXYGENInfo.SetActive(false);
-    }
-
-    public void pickUpOXYGEN()   //pick up item
-    {
-        Debug.Log("pickUp OXYGEN ");
-        pickUpoXYGEN.Instance.pickupOxygentank();
-        pickUpox = true;
-        pickUpOXYGENInfo.SetActive(false);
-    }
-
-    public void ShowpickUp001Info()   //display info
-    {
-        Debug.Log("Show pickUp001 information");
-
-        pickUp001Info.SetActive(true);
-    }
-
-    public void HidepickUp001Info()   //hide info
-    {
-        Debug.Log("hide pickUp001 information");
-
-        pickUp001Info.SetActive(false);
-    }
-
-    public void pickUpitem001()   //pick up item
-    {
-        Debug.Log("pickUp item 001 ");
-        pickUpone.Instance.pickupitem001();
-        pickUp001 = true;
-        pickUp001Info.SetActive(false);
-        bag001Info.SetActive(true);
-    }
-
-    public void ShowpickUp002Info()   //display info
-    {
-        Debug.Log("Show pickUp002 information");
-
-        pickUp002Info.SetActive(true);
-    }
-
-    public void HidepickUp002Info()   //hide info
-    {
-        Debug.Log("hide pickUp002 information");
-
-        pickUp002Info.SetActive(false);
-    }
-
-    public void pickUpitem002()   //pick up item
-    {
-        Debug.Log("pickUp item 002 ");
-        pickUptwo.Instance.pickupitem002();
-        pickUp002 = true;
-        pickUp002Info.SetActive(false);
-        bag002Info.SetActive(true);
-    }
 
 
 
@@ -710,6 +660,12 @@ public class UIManager : MonoBehaviour
                 {
                     Show_Facility_03_Panel();
                 }
+            }
+
+            if (InGameUIshowed && Area_04_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 4
+                                                                            //Interaction can only take place when the player is in range
+            {              
+                    Show_Facility_04_Panel();
             }
 
             if (InGameUIshowed && Area_05_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 5

@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PortalFacility : MonoBehaviour
 {
+    public static PortalFacility Instance; //Instantiating the PortalFacility.cs
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     public void GoTo_fire_country() //Switch scene
     {
         Debug.Log("fire country");

@@ -115,6 +115,20 @@ public class GameManager : MonoBehaviour
         item_002_amount += item_002_amount;
     }
 
+    public void back_to_Past()     //back to the past
+    {
+        Debug.Log("back to the past");
+        UIManager.Instance.ShowGameOverWin_Past();
+    }
+
+    public void back_to_Earth()     //back to the earth
+    {
+        Debug.Log("back to the earth");
+        UIManager.Instance.ShowGameOverWin_Earth();
+
+    }
+
+
     void Update()
     {
         Trigger_Area_02 = Area_02_Trigger.Instance.couldInteract;
