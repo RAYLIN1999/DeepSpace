@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject Facility_03_Panel;     //Energy System Interface
     [SerializeField] private GameObject Facility_04_Panel;     //Spaceship AI Interface
     [SerializeField] private GameObject Facility_05_Panel;     //Portal Facility Interface
+    [SerializeField] private GameObject Fire_Stone_Panel;     //fire stone tablet Interface
+    [SerializeField] private GameObject Wood_Stone_Panel;     //wood stone tablet Interface
 
     [SerializeField] private GameObject GameOverDead;  //game over interface, Player dies , with zero health or oxygen
     [SerializeField] private GameObject GameOverWin_past;  //game over interface, Player win the game, back to the past
@@ -45,6 +47,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject CSH_Normal_Area_04;     //Current Status Hint text pop-ups triggered when approaching this object in area 05
 
     [SerializeField] private GameObject CSH_Normal_Area_05;     //Current Status Hint text pop-ups triggered when approaching this object in area 05
+
+    [SerializeField] private GameObject CSH_Normal_Fire_Stone;     //Current Status Hint text pop-ups triggered when approaching this object in Fire_Stone
+
+    [SerializeField] private GameObject CSH_Normal_Wood_Stone;     //Current Status Hint text pop-ups triggered when approaching this object in Wood_Stone
 
 
     [SerializeField] private TMP_Text HealthPoint;    //Text display of health value
@@ -213,6 +219,39 @@ public class UIManager : MonoBehaviour
         ShowInteractButton();
     }
 
+    public void Show_Fire_Stone_Panel()   //display interface
+    {
+        Debug.Log("Show Fire_Stone Interface");
+        HideInGameUI();
+
+        Fire_Stone_Panel.SetActive(true);
+        HideInteractButton();
+    }
+
+    public void Hide_Fire_Stone_Panel()   //hide interface
+    {
+        Debug.Log("Hide Portal Facility Interface");
+        ShowInGameUI();
+        Fire_Stone_Panel.SetActive(false);
+        ShowInteractButton();
+    }
+
+    public void Show_Wood_Stone_Panel()   //display interface
+    {
+        Debug.Log("Show Wood_Stone Interface");
+        HideInGameUI();
+
+        Wood_Stone_Panel.SetActive(true);
+        HideInteractButton();
+    }
+
+    public void Hide_Wood_Stone_Panel()   //hide interface
+    {
+        Debug.Log("Hide Wood Stone Interface");
+        ShowInGameUI();
+        Wood_Stone_Panel.SetActive(false);
+        ShowInteractButton();
+    }
 
     public void ShowGameOverDead()   //display interface
     {
@@ -526,8 +565,65 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void ShowCurrentStatusHint_Fire_Stone_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint Fire_Stone");
 
+        //if (!GameManager.Instance.Fire_Stone_unlocked)
+        //{
+        //    CSH_Normal_Fire_Stone.SetActive(true);
+        //}
+        //else
+        //{
+            CSH_Normal_Fire_Stone.SetActive(true);
+            ShowInteractButton();
+        //}
+    }
 
+    public void HideCurrentStatusHint_Fire_Stone_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint Fire_Stone");
+
+        //if (!GameManager.Instance.Fire_Stone_unlocked)
+        //{
+        //    CSH_Normal_Fire_Stone.SetActive(false);
+        //}
+        //else
+        //{
+            CSH_Normal_Fire_Stone.SetActive(false);
+            HideInteractButton();
+        //}
+    }
+
+    public void ShowCurrentStatusHint_Wood_Stone_Trigger()   //show the current status hint of this game object
+    {
+        Debug.Log("Show the current status hint Wood_Stone");
+
+        //if (!GameManager.Instance.Wood_Stone_unlocked)
+        //{
+        //    CSH_Normal_Wood_Stone.SetActive(true);
+        //}
+        //else
+        //{
+            CSH_Normal_Wood_Stone.SetActive(true);
+            ShowInteractButton();
+        //}
+    }
+
+    public void HideCurrentStatusHint_Wood_Stone_Trigger()   //hide the current status hint of this game object
+    {
+        Debug.Log("hide the current status hint Wood_Stone");
+
+        //if (!GameManager.Instance.Wood_Stone_unlocked)
+        //{
+        //    CSH_Normal_Wood_Stone.SetActive(false);
+        //}
+        //else
+        //{
+            CSH_Normal_Wood_Stone.SetActive(false);
+            HideInteractButton();
+        //}
+    }
 
     void Awake()
     {
@@ -675,6 +771,18 @@ public class UIManager : MonoBehaviour
                                                                             //Interaction can only take place when the player is in range
             {
                     Show_Facility_05_Panel(); 
+            }
+
+            if (InGameUIshowed && Fire_Stone_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Fire_Stone
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Show_Fire_Stone_Panel();
+            }
+
+            if (InGameUIshowed && Wood_Stone_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Wood_Stone
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Show_Wood_Stone_Panel();
             }
 
             if (InGameUIshowed&&ConversationButtonshowed)    //If the Talk button is displayed, a conversation can be started

@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool Area_02_unlocked = false;
     [SerializeField] public bool Area_03_unlocked = false;
 
+    [SerializeField] public bool Fire_Stone_unlocked = false;  //Determine if the stone is unlocked
+    [SerializeField] public bool Wood_Stone_unlocked = false;
+
     [SerializeField] public bool Equipment_01_Upgrades = false;   //Determine if the equipment is upgraded
     [SerializeField] public bool Equipment_02_Upgrades = false;
     [SerializeField] public bool Equipment_03_Upgrades = false;
