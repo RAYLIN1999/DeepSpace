@@ -22,6 +22,7 @@ public class PickUp : MonoBehaviour
         if (Col.gameObject.tag == "Player")
         {
             Col.gameObject.SendMessage("ObjectPickedUp");
+            AudioManager.instance.Play("victory");
         }
 
         Destroy(gameObject);

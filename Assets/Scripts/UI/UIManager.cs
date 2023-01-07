@@ -436,6 +436,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("open the door");
         doorOpened = true;
         Door.Instance.hideDoor1();
+        AudioManager.instance.Play("collect");
     }
 
     public void DoorClose()   //close the door

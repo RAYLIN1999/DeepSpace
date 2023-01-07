@@ -59,9 +59,6 @@ public class WeaponControl : MonoBehaviour
     /// </summary>
     public void GunFire()
     {
-        //控制射速，如果计时器比射速还小，跳出方法（不射击
-        //每帧减少射线执行的次数，从而降低射速
-        //子弹为0时退出射击。
 
         //control the rate of fire, if the timer is smaller than the rate of fire, jump out of the method (no shooting)
         //reduce the number of times the shot is executed per frame, thus reducing the rate of fire
@@ -71,9 +68,10 @@ public class WeaponControl : MonoBehaviour
             return;
         }
 
-        //shoot                                 射击
+        //shoot             
         RaycastHit hit;
-        Vector3 shootDirection = shootPoint.forward;//Shooting direction forward                射击方向向前
+        AudioManager.instance.Play("shoot1");
+        Vector3 shootDirection = shootPoint.forward;//Shooting direction forward    
         if (Physics.Raycast(shootPoint.position, shootDirection, out hit, range))//Range of 100 yards (range), if it hits an object, the information is stored in the hit       100码（range）的射程，如果击中物体，则会将信息存放到 hit 中
         {
             var comb = hit.collider.gameObject.GetComponent<BasicCombatant>();
@@ -84,7 +82,7 @@ public class WeaponControl : MonoBehaviour
             }
         }
 
-        currentBullet--;//Less one bullet per shot                      每次射击子弹减一
+        currentBullet--;//Less one bullet per shot   
         UpdateAmmoUI();
 
         fireTime = 0;

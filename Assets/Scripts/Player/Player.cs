@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     {
         CombatSystem.AddCombatAct(myComb, myComb, new DamageDealer { RawValue = damage }, "Self damage test");
         //UIManager.Instance.SetHealth((int)myComb.HitPoint);   //Synchronised bar values
+        AudioManager.instance.Play("damage");
     }
 
     void LoseOxygen(int lose)
@@ -87,5 +88,6 @@ public class Player : MonoBehaviour
     public void pickupOxygenTank()
     {
         addOxygen(1);
+        AudioManager.instance.Play("collect");
     }
 }
