@@ -10,18 +10,18 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController characterController;
-    public float walkSpeed = 10f;//Movement speed           移动速度
-    public float runSpeed = 15f;//Running speed             奔跑速度
+    public float walkSpeed = 10f;//Movement speed         
+    public float runSpeed = 15f;//Running speed            
     public float speed;
-    public Vector3 moveDriction;//Setting the direction of movement             设置移动方向
+    public Vector3 moveDriction;//Setting the direction of movement           
     public bool isRun;
 
-    //Jump                  跳跃
-    public float jumpForce = 3f;//The force of jumping          跳跃的力
-    public Vector3 velocity;//Force                             力
+    //Jump       
+    public float jumpForce = 3f;//The force of jumping          
+    public Vector3 velocity;//Force                            
     private bool isJump;
     
-    public float gravity = -25f;//Gravity                       重力
+    public float gravity = -25f;//Gravity                     
     private Transform groundCheck;
     private float groundDistance = 0.1f;
     public LayerMask groundMash;
@@ -30,14 +30,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float slopeForce = 6.0f;
     [SerializeField] private float slopeForceRayLenth = 2.0f;
 
-    /*Setting the keys              设置键位*/
+    /*Setting the keys*/
     [Header("Keyboard Setting")]
-    [SerializeField]private KeyCode runInputName;//Running keys                     奔跑键位
-    [SerializeField] private KeyCode jumpInputName;//Jump keys                      跳跃键位
+    [SerializeField]private KeyCode runInputName;//Running keys                  
+    [SerializeField] private KeyCode jumpInputName;//Jump keys                    
 
     private void Start()
     {
-        //Get the player's CharacterController component                            获取player的CharacterController组件
+        //Get the player's CharacterController component                          
         characterController = GetComponent<CharacterController>();
         runInputName = KeyCode.LeftShift;
         jumpInputName = KeyCode.Space;
@@ -47,15 +47,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        CheckGround();
+        //CheckGround();
         Move();
     }
 
     public void Move()
     {
-        //Move and run                                                                   移动和奔跑
-        float hor = Input.GetAxis("Horizontal");//Get horizontal axis shaft             获取水平轴轴体
-        float ver = Input.GetAxis("Vertical");//Get the vertical axis shaft             获取垂直轴轴体
+        //Move and run                                                                   
+        float hor = Input.GetAxis("Horizontal");//Get horizontal axis shaft             
+        float ver = Input.GetAxis("Vertical");//Get the vertical axis shaft            
         isRun = Input.GetKey(runInputName);
         if (isRun)
         {
@@ -69,18 +69,18 @@ public class PlayerMovement : MonoBehaviour
         moveDriction = (transform.right * hor + transform.forward * ver).normalized;
         characterController.Move(moveDriction*speed*Time.deltaTime);
 
-        //Jump                                                                                    跳跃
-        if (isGround == false)//Not applying downward gravity on the ground (in the air)        不在地面上（空中）施加向下的重力
+        //Jump                                                                                
+        if (characterController.isGrounded == false)//Not applying downward gravity on the ground (in the air)      
         {
             velocity.y += gravity * Time.deltaTime;
         }
         characterController.Move(velocity*Time.deltaTime);
         Jump();
 
-        //If moving on a slope                                          如果在斜坡上移动
+        //If moving on a slope                                       
         if (OnSlope())
         {
-            //Add a downward force                                      增加一个向下的力
+            //Add a downward force        
             characterController.Move(Vector3.down * characterController.height / 2 * slopeForce * Time.deltaTime);
         }
 
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isJump = Input.GetKey(jumpInputName);
 
-        if (isJump && isGround)
+        if (isJump && characterController.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
@@ -106,12 +106,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Detects if it is on a flat surface                                                        检测是否在平面上
+    //Detects if it is on a flat surface
     public bool OnSlope()
     {
         if (isJump)
             return false;
-        //Send a ray downwards to check if it is on the slope                                       向下发出射线，检查是否在斜坡上
+        //Send a ray downwards to check if it is on the slope
         if (Physics.Raycast(transform.position,new Vector3(0,-1,0),out RaycastHit hit, characterController.height/2*slopeForceRayLenth))
         {
             if(hit.normal != Vector3.up)
