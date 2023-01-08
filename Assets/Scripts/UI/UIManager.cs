@@ -913,6 +913,36 @@ public class UIManager : MonoBehaviour
                 //Get_wood_tool_Trigger.Instance.get_wood_tool();    //get wood tool
             }
 
+            if (InGameUIshowed && Item_010_PickUp.Instance.couldInteract)   //Allows players to interact with the facilities in portal_backtoship
+                                                                                  //Interaction can only take place when the player is in range
+            {
+                Debug.Log("get item 010");
+                //Item_010_PickUp.Instance.get_010_item();    //get item 010
+            }
+
+            if (InGameUIshowed && Item_011_PickUp.Instance.couldInteract)   //Allows players to interact with the facilities in portal_backtoship
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Debug.Log("get item 011");
+                //Item_011_PickUp.Instance.get_011_item();    //get item 011
+            }
+
+            if (InGameUIshowed && Item_014_PickUp.Instance.couldInteract)   //Allows players to interact with the facilities in portal_backtoship
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Debug.Log("get item 014");
+                //Item_014_PickUp.Instance.get_014_item();    //get item 014
+            }
+
+            if (InGameUIshowed && Item_016_PickUp.Instance.couldInteract)   //Allows players to interact with the facilities in portal_backtoship
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Debug.Log("get item 016");
+                //Item_016_PickUp.Instance.get_016_item();    //get item 016
+            }
+
+
+
             if (InGameUIshowed && Wood_0_1_Door_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in portal_backtoship
                                                                               //Interaction can only take place when the player is in range
             {
