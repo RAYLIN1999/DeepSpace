@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UITrigger : MonoBehaviour
 {
-    public GameObject UIElement = null;
+    public UISupervisor.TriggeredUI type;
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            UIElement.SetActive(true);
+            UISupervisor.Instance.TriggerElemOn(type);
             GameState.currInteractObj = gameObject;
         }
     }
@@ -17,7 +17,7 @@ public class UITrigger : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            UIElement.SetActive(false);
+            UISupervisor.Instance.TriggerElemOff(type);
             if (GameState.currInteractObj == gameObject)
                 GameState.currInteractObj = null;
         }

@@ -76,16 +76,25 @@ class Tutorial : Story
             },
             new Mission
             {
-                setup = () => { },
+                setup = () => { OxTank= GameObject.Find("oxygen_tank_tutorial"); },
                 finalize = () => {},
                 subTaskCheck = new()
                 {
-                    () => { },
-                    () => { },
+                    () => {
+                        if(OxTank.GetComponent<StoryTrigger>().IsTriggered && Input.GetKeyDown(KeyCode.F))
+                        {
+                            missList[2].subTaskFinished[0] = true;
+                            missList[2].subTaskProgress[0] = GameState.ItemAmount[1];//TODO: ID
+                        }
+                    },
+                    () => {
+                        if(GameState.ItemAmount[1]<missList[2].subTaskProgress[0])
+                            missList[2].subTaskFinished[1] = true; 
+                    },
                 },
                subTaskProgress = new()
                 {
-                    0, 0
+                    0
                 },
                 subTaskFinished = new()
                 {
@@ -93,19 +102,35 @@ class Tutorial : Story
                 },
                 subTaskText = new()
                 {
-                    "Pick up the object",
-                    "Use the object in inventory",
+                    "Pick up the Oxygen tank",
+                    "Use the oxygen tank in inventory",
                 },
             },
             new Mission
             {
-                setup = () => { },
+                setup = () => {
+                    SetPriorCombatTarget((s,t,i)=>{
+                        if(s == Player.Instance.GetComponent<BasicCombatant>())
+                        {
+                            missList[3].subTaskFinished[0] = true; return true;
+                        }
+                        return false;
+                    });
+                    SetLaterCombatTarget((s,t,i,r)=>{
+                        if(s == Player.Instance.GetComponent<BasicCombatant>() && r.killed == true)
+                        {
+                            missList[3].subTaskFinished[1] = true; return true;
+                        }
+                        return false;
+                    });
+                },
                 finalize = () => {},
                 subTaskCheck = new()
                 {
-                    () => { },
-                    () => { },
-                    () => { },
+                    () => {
+                        if(Input.GetKeyDown(KeyCode.R))
+                            missList[3].subTaskFinished[2] = true;
+                    },
                 },
                 subTaskProgress = new()
                 {
@@ -117,8 +142,8 @@ class Tutorial : Story
                 },
                 subTaskText = new()
                 {
-                    "Use Left Button to shoot",
-                    "Kill 2 monsters outside the ship",
+                    "Use Left Button to shoot monsters",
+                    "Kill 1 monster outside the ship",
                     "Use R to reload",
                 },
             },
@@ -128,12 +153,12 @@ class Tutorial : Story
                 finalize = () => {},
                 subTaskCheck = new()
                 {
-                    () => { },
+                    () => {
+                        if(AITrigger.GetComponent<StoryTrigger>().IsTriggered && Input.GetKeyDown(KeyCode.F))
+                            missList[4].subTaskFinished[0] = true;
+                    },
                 },
-                subTaskProgress = new()
-                {
-                    0
-                },
+                subTaskProgress = null,
                 subTaskFinished = new()
                 {
                     false
@@ -152,5 +177,6 @@ class Tutorial : Story
 
     // Related Game Objects
     GameObject AITrigger = null;
+    GameObject OxTank = null;
 
 }

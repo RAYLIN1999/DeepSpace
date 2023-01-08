@@ -48,8 +48,6 @@ public class BagManager : MonoBehaviour
         Debug.Log("Initialise bag menu");
         button_Healthy.Select();
     }
-    
-
 
 //show or hide items in the categories
     public void Show_Category_Healthy()     //Show items in the category Health
@@ -438,6 +436,22 @@ public class BagManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        item_001_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[0].ToString();
+        item_002_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[1].ToString();
+        item_003_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[2].ToString();
+        item_004_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[3].ToString();
+        item_005_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[4].ToString();
+        item_006_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[5].ToString();
+        item_007_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[6].ToString();
+        item_008_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[7].ToString();
+        item_009_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[8].ToString();
+        item_010_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[9].ToString();
+        item_011_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[10].ToString();
+        item_012_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[11].ToString();
+        item_013_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[12].ToString();
+        item_014_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[13].ToString();
+        item_015_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[14].ToString();
+        item_016_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[15].ToString();
+        item_017_detail.transform.Find("Amount").GetChild(0).gameObject.GetComponent<TMP_Text>().text = GameState.ItemAmount[16].ToString();
     }
 }

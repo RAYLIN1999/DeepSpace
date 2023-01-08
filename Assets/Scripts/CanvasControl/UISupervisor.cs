@@ -7,17 +7,22 @@ using TMPro;
 
 public class UISupervisor : MonoBehaviour
 {
+    public static UISupervisor Instance;
     void Awake()
     {
+        Instance = this;
         DontDestroyOnLoad(transform.gameObject);
     }
+
+    public enum TriggeredUI { Dialogue, Pickup, South, West };
 
     // States
     bool PauseMenuShowed = false;
     bool BagMenuShowed = false;
     bool TaskMenuShowed = false;
+    bool ConversationButtonshowed = false;
 
-    bool InGameUIshowed = true;
+    public bool InGameUIshowed = true;
 
     // Binded UI Objects
     [SerializeField] private GameObject InGameUI;                   //The normal interface display of the game running
@@ -70,6 +75,10 @@ public class UISupervisor : MonoBehaviour
 
     [SerializeField] private TMP_Text item_004_amount;
 
+    //UI controllers
+    public HealthBar healthBar; //Reference script HealthBar.cs
+    public OxygenBar oxygenBar; //Reference script OxygenBar.cs
+
     // UI Control Functions
     void ShowInGameUI()                                 //display HUD, hide the menu
     {
@@ -104,6 +113,7 @@ public class UISupervisor : MonoBehaviour
     {
         HideInGameUI();                                 //Hide HUD for better visual
         TaskMenuShowed = true;
+        TaskMenu.Instance.UpdateMenu();                 //Update the content
         TasksMenu.SetActive(true);
     }
 
@@ -130,18 +140,151 @@ public class UISupervisor : MonoBehaviour
         BagMenu.SetActive(false);
         BagManager.Instance.Initialise_BagMenu();
     }
-    void BackToMainMenu()
+    public void StartTalk()                             //start conversation, display dialogue interface
     {
-
-    }void ReplayGame()
-    {
+        DialogueInterface.SetActive(true);              //Show dialogue interface
+        HideInGameUI();                                 //Hide other interfaces
+        HideStartTalkButton();
+        DialogueTrigger.Instance.TriggerDialogue();     //Trigger conversation
 
     }
+    public void ContinueTalk()                          //next sentence
+    {
+        DialogueManager.Instance.DisplayNextSentence(); //Switch to the next dialogue
 
+    }
+    public void EndTalk()                               //end conversation, hide dialogue interface
+    {
+        DialogueInterface.SetActive(false);             //Hide the dialogue interface
+        ShowContinueTalkButton();
+        HideCloseTalkButton();
+        ShowInGameUI();
+        DialogueManager.Instance.changeBool();
+    }
+
+    //Btns
+    public void ShowInteractButton()   //display button
+    {
+        interactButton.SetActive(true);
+    }
+
+    public void HideInteractButton()   //hide button
+    {
+        interactButton.SetActive(false);
+    }
+    public void ShowStartTalkButton()   //display button
+    {
+        ConversationButtonshowed = true;
+        startTalkButton.SetActive(true);
+    }
+
+    public void HideStartTalkButton()   //hide button
+    {
+        ConversationButtonshowed = false;
+        startTalkButton.SetActive(false);
+    }
+
+    public void ShowContinueTalkButton()   //display button
+    {
+        continueTalkButton.SetActive(true);
+    }
+
+    public void HideContinueTalkButton()   //hide button
+    {
+        continueTalkButton.SetActive(false);
+    }
+
+    public void ShowCloseTalkButton()   //display button
+    {
+        closeTalkButton.SetActive(true);
+    }
+
+    public void HideCloseTalkButton()   //hide button
+    {
+        closeTalkButton.SetActive(false);
+    }
+    public void ShowPickUpButton()                      //display button
+    {
+        pickUpButton.SetActive(true);
+    }
+
+    public void HidePickUpButton()                      //hide button
+    {
+        pickUpButton.SetActive(false);
+    }
+
+    //
+    public void TriggerElemOn(TriggeredUI _Type)
+    {
+        switch (_Type)
+        {
+            case TriggeredUI.Dialogue:
+                ShowInteractButton();
+                ShowStartTalkButton();
+                break;
+            case TriggeredUI.Pickup:
+                ShowPickUpButton();
+                break;
+            case TriggeredUI.South:
+                break;
+            case TriggeredUI.West:
+                break;
+            default:
+                break;
+        }
+    }
+    public void TriggerElemOff(TriggeredUI _Type)
+    {
+        switch (_Type)
+        {
+            case TriggeredUI.Dialogue:
+                HideInteractButton();
+                HideStartTalkButton();
+                break;
+            case TriggeredUI.Pickup:
+                HidePickUpButton();
+                break;
+            case TriggeredUI.South:
+                break;
+            case TriggeredUI.West:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void BackToMainMenu()   //turn to scene 'mainmenu'
+    {
+        HidePauseMenu();
+        SceneManager.LoadScene(0);
+        GameState.Reset();
+        StoryLine.Instance.Restart();
+    }
+
+    public void ReplayGame()   //reload scene 'maingame'
+    {
+        HidePauseMenu();
+        SceneManager.LoadScene(3);
+        GameState.Reset();
+        StoryLine.Instance.Restart();
+    }
+
+    private void Start()
+    {
+    }
 
     // Update is called once per frame
     void Update()
     {
+        //update HUD elements
+        healthBar.SetMaxHealth((int)Player.Instance.MaxHP);
+        healthBar.SetHealth((int)Player.Instance.CurrentHP);
+        oxygenBar.SetMaxOxygen(Player.Instance.maxOxygen);
+        oxygenBar.SetOxygen(Player.Instance.currentOxygen);
+        HealthPoint.text = "" + Player.Instance.CurrentHP;
+        OxygenPoint.text = "" + Player.Instance.currentOxygen;
+
+        //process key events
         if (Input.GetKeyUp(KeyCode.P))                  //Shortcut keys to control the display of the  pause menu interface
         {
             if (PauseMenuShowed && !InGameUIshowed)     //It can only be triggered when the  pause menu interface is displayed
@@ -198,9 +341,36 @@ public class UISupervisor : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.F))                  //Shortcut keys to interact with the facility
+        if (Input.GetKeyUp(KeyCode.F))                  //Shortcut keys to interact
         {
+            var item = GameState.currInteractObj.GetComponent<ItemComp>();
+            if (item != null)
+            {
+                //pickup
+                GameState.ItemAmount[item.itemID] += 1;
+                GameState.currInteractObj.SetActive(false);
+                return;
+            }
+            var dia = GameState.currInteractObj.GetComponent<DialogueTrigger>();
+            if (dia != null)
+            {
+                if (InGameUIshowed && ConversationButtonshowed)    //If the Talk button is displayed, a conversation can be started
+                {
+                    StartTalk();
+
+                }
+                else if (!InGameUIshowed && DialogueManager.Instance.ConversationOver)  //If the conversation is over, then you can end it
+                {
+                    EndTalk();
+                }
+                else if (!InGameUIshowed && DialogueManager.Instance.ConversationStart) //If the conversation starts then the button can be used
+                {
+                    ContinueTalk();
+                }
+                return;
+            }
 
         }
+
     }
 }

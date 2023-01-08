@@ -31,6 +31,11 @@ public class BasicCombatant : MonoBehaviour
     public double MaxHitPoint { get => maxHP; protected set => maxHP = value; }
     public bool IsDead { get; protected set; }
 
+    public void SetHP(double _HP)
+    {
+        HitPoint = _HP;
+    }
+
     /// <summary>
     /// Initialization
     /// </summary>

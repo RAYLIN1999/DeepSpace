@@ -56,6 +56,14 @@ static class CombatSystem
         AsSource.Clear();
         Logs.Clear();
     }
+    static public void AddPriorFunc(Func<BasicCombatant, BasicCombatant, CombatMessenger, bool> _Callback)
+    {
+        PriorFuncs.Add(_Callback);
+    }
+    static public void AddLaterFunc(Func<BasicCombatant, BasicCombatant, CombatMessenger, CombatActionReturn, bool> _Callback)
+    {
+        LaterFuncs.Add(_Callback);
+    }
     /// <summary>
     /// Add a combat action to perform and log
     /// </summary>

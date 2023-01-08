@@ -18,13 +18,12 @@ public class DialogueTrigger : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other)     //Show button when triggered
-
     {
-        UIManager.Instance.ShowStartTalkButton();
+        //UIManager.Instance.ShowStartTalkButton();
     }
 
     public void OnTriggerExit(Collider other) //Hide button when not triggered
     {
-        UIManager.Instance.HideStartTalkButton();
+        //UIManager.Instance.HideStartTalkButton();
     }
 }

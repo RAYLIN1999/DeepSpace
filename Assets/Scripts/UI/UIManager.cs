@@ -109,7 +109,6 @@ public class UIManager : MonoBehaviour
         HideInGameUI();
         TaskMenuShowed = true;
         TasksMenu.SetActive(true);
-        TaskMenu.Instance.show_01_content();
         
     }
 
@@ -119,7 +118,6 @@ public class UIManager : MonoBehaviour
         ShowInGameUI();
         TaskMenuShowed = false;
         TasksMenu.SetActive(false);
-        TaskMenu.Instance.show_01_content();
     }
 
     public void HidePauseMenu()   //hide interface

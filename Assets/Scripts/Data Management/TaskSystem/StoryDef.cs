@@ -64,22 +64,22 @@ public abstract class Story
     {
         return _IsMain ? _ID : _ID << 16; //65535 is enough for this game
     }
+    /// <summary>
+    /// Set a callback function into combat system to capture combat events before the event is calculated
+    /// </summary>
+    /// <param name="_Callback">Callback Func: (Source, Target, Info) => true: object found, false: not found</param>
     static protected void SetPriorCombatTarget(Func<BasicCombatant, BasicCombatant, CombatMessenger, bool> _Callback)
     {
-
+        CombatSystem.AddPriorFunc(_Callback);
     }
+    /// <summary>
+    /// Set a callback function into combat system to capture combat events after the event is calculated
+    /// </summary>
+    /// <param name="_Callback">Callback Func: (Source, Target, Info, CombatResult) => true: object found, false: not found</param>
     static protected void SetLaterCombatTarget(Func<BasicCombatant, BasicCombatant, CombatMessenger, CombatActionReturn, bool> _Callback)
     {
-
+        CombatSystem.AddLaterFunc(_Callback);
     }
-    static protected void SetTriggerTarget(Func<bool> _Callback, StoryTrigger _Which)
-    {
-
-    }
-    //static protected void SetInventoryTarget(Func<List<Item>, bool> _Callback)
-    //{
-
-    //}
     /// <summary>
     /// Story Name
     /// </summary>

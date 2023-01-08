@@ -9,8 +9,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BasicCombatant))]
 public class Player : MonoBehaviour
 {
-    public static Player Instance; //Instantiating the MenuManager
-
+    static public Player Instance = null;
     public bool IsDead { get => myComb.HitPoint == 0; }
 
     public double CurrentHP => myComb.HitPoint;
@@ -19,23 +18,21 @@ public class Player : MonoBehaviour
     public int maxOxygen = 10;     //Maximum Oxygen value
     public int currentOxygen;      //Current Oxygen value
 
-    public OxygenBar oxygenBar; //Reference script OxygenBar.cs
 
     private BasicCombatant myComb;
 
     void Awake()
     {
-        myComb = GetComponent<BasicCombatant>();
         Instance = this;
+        myComb = GetComponent<BasicCombatant>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (GameState.PlayerHP > 0) myComb.SetHP(GameState.PlayerHP);
         currentOxygen = maxOxygen - 1;
-        //currentOxygen = maxOxygen;
-        oxygenBar.SetMaxOxygen(maxOxygen);
-
+        if (GameState.PlayerOx > 0) currentOxygen = (GameState.PlayerOx);
     }
 
     // Update is called once per frame
@@ -68,20 +65,16 @@ public class Player : MonoBehaviour
         {
             currentOxygen = 0;
         }
-
-        oxygenBar.SetOxygen(currentOxygen);   //Synchronised bar values
     }
 
     void addOxygen(int add)
     {
         currentOxygen += add;   //add oxygen values
 
-        if (currentOxygen >10)    //Avoid above 10
+        if (currentOxygen > 10)    //Avoid above 10
         {
             currentOxygen = 10;
         }
-
-        oxygenBar.SetOxygen(currentOxygen);   //Synchronised bar values
     }
 
     public void pickupOxygenTank()
