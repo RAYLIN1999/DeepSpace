@@ -107,6 +107,7 @@ public class UISupervisor : MonoBehaviour
         ShowInGameUI();
         PauseMenuShowed = false;
         PauseMenu.SetActive(PauseMenuShowed);
+        
     }
 
     public void ShowTaskMenu()                          //display task menu

@@ -12,8 +12,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public Button Button_normal;
     [SerializeField] public Button Button_hard;
 
-    [SerializeField] public GameObject Button_on;
-    [SerializeField] public GameObject Button_off;
+    [SerializeField] private GameObject Button_on;
+    [SerializeField] private GameObject Button_off;
 
     [SerializeField] public bool diff_easy = false;
     [SerializeField] public bool diff_normal = false;

@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject TasksMenu;    //task menu interface
     [SerializeField] private GameObject PauseMenu;   //pause menu interface
     [SerializeField] private GameObject BagMenu;     //bag menu interface
+    [SerializeField] private GameObject SettingMenu;     //setting menu interface
 
     [SerializeField] private GameObject Facility_02_Panel;     //Upgrade System Interface
     [SerializeField] private GameObject Facility_03_Panel;     //Energy System Interface
@@ -75,6 +76,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool doorButtonshowed = false;   //Determine if the door button is displayed
     [SerializeField] public bool doorOpened = false;   //Determining whether a door is open or not
 
+    [SerializeField] private GameObject Button_on;
+    [SerializeField] private GameObject Button_off;
+
+
+
 
 
     public void ShowInGameUI()     //display in game interface, hide the menu
@@ -126,6 +132,7 @@ public class UIManager : MonoBehaviour
         ShowInGameUI();
         PauseMenuShowed = false;
         PauseMenu.SetActive(false);
+        SettingMenu.SetActive(false);
     }
 
 
@@ -429,20 +436,7 @@ public class UIManager : MonoBehaviour
         doorButton.SetActive(false);
     }
 
-    public void DoorOpen()   //open the door
-    {
-        Debug.Log("open the door");
-        doorOpened = true;
-        Door.Instance.hideDoor1();
-        AudioManager.instance.Play("collect");
-    }
-
-    public void DoorClose()   //close the door
-    {
-        Debug.Log("close the door");
-        doorOpened = false;
-        Door.Instance.showDoor1();
-    }
+    
 
     public void ShowCurrentStatusHint_Area_01_Trigger()   //show the current status hint of this game object
     {
@@ -622,6 +616,48 @@ public class UIManager : MonoBehaviour
             CSH_Normal_Wood_Stone.SetActive(false);
             HideInteractButton();
         //}
+    }
+    public void show_setting_menu_interface()
+    {
+        Debug.Log("show_setting_menu_interface");
+        SettingMenu.SetActive(true);
+
+    }
+    public void hide_setting_menu_interface()
+    {
+        Debug.Log("hide_setting_menu_interface");
+        SettingMenu.SetActive(false);
+
+    }
+
+
+    public void set_sound_value_Increase()
+    {
+        Debug.Log("sound value --> +");
+
+        //TODO
+    }
+
+    public void set_sound_value_Decrease()
+    {
+        Debug.Log("sound value --> -");
+        //TODO
+    }
+
+    public void set_background_music_ON()
+    {
+        Debug.Log("background music --> on");
+        Button_on.SetActive(true);
+        Button_off.SetActive(false);
+        //TODO    turn on music
+    }
+
+    public void set_background_music_OFF()
+    {
+        Debug.Log("background music --> off");
+        Button_on.SetActive(false);
+        Button_off.SetActive(true);
+        //TODO   turn off music
     }
 
     void Awake()
@@ -807,21 +843,7 @@ public class UIManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.G))   //Shortcut keys to open or close the door
-        {
-            if (doorButtonshowed) //If the door button is displayed then it can be triggered
-            {
-                if (doorOpened)
-                {
-                    DoorClose();
-                }
-                else
-                {
-                    DoorOpen();
-                }
-            }
 
-        }
 
     }
 }
