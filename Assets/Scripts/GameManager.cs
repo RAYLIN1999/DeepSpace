@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool Trigger_Area_03 = false;
     [SerializeField] public bool Trigger_Area_05 = false;
 
+    [SerializeField] public bool Difficulty_easy = false;     //Judging the difficulty of the game
+    [SerializeField] public bool Difficulty_normal = false;
+    [SerializeField] public bool Difficulty_hard = false;
+
 
     [SerializeField] public int item_001_amount;     //Amount of the items
     [SerializeField] public int item_002_amount; 
@@ -55,8 +59,33 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
+
+    public void Set_Difficulty_Easy()     //set the difficulty of the game
+    {
+        Debug.Log("defficult --> Easy");
+        Difficulty_easy = true;
+        Difficulty_normal = false;
+        Difficulty_hard = false;
+    }
+
+    public void Set_Difficulty_Normal()     //set the difficulty of the game
+    {
+        Debug.Log("defficult --> Normal");
+        Difficulty_easy = false;
+        Difficulty_normal = true;
+        Difficulty_hard = false;
+    }
+
+    public void Set_Difficulty_Hard()     //set the difficulty of the game
+    {
+        Debug.Log("defficult --> Hard");
+        Difficulty_easy = false;
+        Difficulty_normal = false;
+        Difficulty_hard = true;
+    }
+
 
     public void Area_01_unlock()     //unlock the area 01
     {

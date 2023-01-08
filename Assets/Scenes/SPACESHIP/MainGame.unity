@@ -29632,6 +29632,9 @@ MonoBehaviour:
   Trigger_Area_02: 0
   Trigger_Area_03: 0
   Trigger_Area_05: 0
+  Difficulty_easy: 0
+  Difficulty_normal: 0
+  Difficulty_hard: 0
   item_001_amount: 0
   item_002_amount: 0
   item_003_amount: 0
@@ -43691,19 +43694,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f020ce35566024db5bfdf5741420cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content_01_button: {fileID: 795909840}
-  button_04: {fileID: 1368267268}
-  button_05: {fileID: 1512463318}
-  content_01: {fileID: 967809989}
-  content_02: {fileID: 927415255}
-  content_03: {fileID: 1416262223}
-  content_04: {fileID: 1840414119}
-  content_05: {fileID: 845643818}
-  info_01: {fileID: 1726576191}
-  info_02: {fileID: 729882112}
-  info_03: {fileID: 636887887}
-  info_04: {fileID: 487233547}
-  info_05: {fileID: 1680714735}
+  button_f: {fileID: 0}
+  button_w: {fileID: 0}
+  content_tt: {fileID: 0}
+  content_m: {fileID: 0}
+  content_f: {fileID: 0}
+  content_w: {fileID: 0}
+  ttText: {fileID: 0}
+  mainText: {fileID: 0}
+  fireText: {fileID: 0}
+  woodText: {fileID: 0}
+  mainTitle: {fileID: 0}
+  tip: {fileID: 0}
+  tipText: 
+  currMaxMain: 0
+  currMaxFire: 0
+  currMaxWood: 0
 --- !u!1 &1173041056
 GameObject:
   m_ObjectHideFlags: 0
@@ -78713,7 +78719,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018350401}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &2018350403
 Camera:
   m_ObjectHideFlags: 0
@@ -78769,10 +78775,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 238228049}
   - {fileID: 357965876}
-  m_Father: {fileID: 793164131}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2018350405
 MonoBehaviour:
@@ -84615,7 +84620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2845152028686017170, guid: d92a65501d6d0aa4bb21a562675c5bb2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.51
+      value: 75.9
       objectReference: {fileID: 0}
     - target: {fileID: 2845152028686017170, guid: d92a65501d6d0aa4bb21a562675c5bb2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -84623,7 +84628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2845152028686017170, guid: d92a65501d6d0aa4bb21a562675c5bb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.67
+      value: 233.5
       objectReference: {fileID: 0}
     - target: {fileID: 2845152028686017170, guid: d92a65501d6d0aa4bb21a562675c5bb2, type: 3}
       propertyPath: m_LocalRotation.w
