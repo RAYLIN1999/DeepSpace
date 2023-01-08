@@ -17,6 +17,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool Area_02_unlocked = false;
     [SerializeField] public bool Area_03_unlocked = false;
 
+    [SerializeField] public bool Door_Wood_0_1_unlocked = false;    //Determine if the door is unlocked
+    [SerializeField] public bool Door_Wood_1_2_unlocked = false;
+    [SerializeField] public bool Door_Wood_2_3_unlocked = false;
+    [SerializeField] public bool Door_Wood_3_0_unlocked = false;
+    [SerializeField] public bool Door_Fire_0_1_unlocked = false;    
+    [SerializeField] public bool Door_Fire_1_2_unlocked = false;
+    [SerializeField] public bool Door_Fire_2_3_unlocked = false;
+    [SerializeField] public bool Door_Fire_3_0_unlocked = false;
+
     [SerializeField] public bool Fire_Stone_unlocked = false;  //Determine if the stone is unlocked
     [SerializeField] public bool Wood_Stone_unlocked = false;
 
