@@ -12,9 +12,9 @@ public class StoryLine : MonoBehaviour
     static public StoryLine Instance = null;
     // quest heads
     private Story tutorial = new Tutorial();
-    private Story firstWood = null;
-    private Story firstFire = null;
-    private Story firstMain = null;
+    private Story firstWood = new Wood();
+    private Story firstFire = new Fire();
+    private Story firstMain = new Main1();
 
     //states
     static private Story currentMain = null;

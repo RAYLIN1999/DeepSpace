@@ -245,7 +245,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Show Fire_Stone Interface");
         HideInGameUI();
-
+        GameState.FireAccessed = true;
         Fire_Stone_Panel.SetActive(true);
         HideInteractButton();
     }
@@ -262,7 +262,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Show Wood_Stone Interface");
         HideInGameUI();
-
+        GameState.WoodAccessed = true;
         Wood_Stone_Panel.SetActive(true);
         HideInteractButton();
     }

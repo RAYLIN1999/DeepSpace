@@ -42,24 +42,37 @@ public class TaskMenu : MonoBehaviour
     List<Tuple<string, string>> MainText =         //Text of Main quests
         new()
         {
-            new("1","2"),
-            new("1","2"),
-            new("1","2"),
-            new("1","2"),
+            new("Main1","Pick up the items in the storage area"),
+            new("Main-Wood","Go to the Wood country via the portal facility and get the item Wood Orb and item Plant Killer."),
+            new("Main-Wood","Interact with the stone tablet at the entrance to trigger the side task 'Wood Country Deciphered'"),
+            new("Main-Ship","Return to the spaceship, interact with AI and repair the equipment upgrade facility with item Metal Pack"),
+            new("Main-Fire","Go to the Fire country via the portal facility and get the item Fire Orb and item Metal Pack."),
+            new("Main-Fire","Interact with the stone tablet at the entrance to trigger the side task 'Fire Country Deciphered'"),
+            new("Main-Return","Return to the spaceship, interact with AI and repair the ENERGY facility with item Fuel Pack"),
+            new("Main-Return","Talk to AI, player chooses to return to Earth or go back to the past with item Fire+Wood Orb"),
         };
 
     List<Tuple<string, string>> FireText =         //Text of Fire quests
         new()
         {
-            new("1","2"),
+            new("Fire Country Deciphered","Collect the item 014 and item 015. Then interact with the stone tablet to repair it"),
+            new("Fire Explore","Enter the Fire Country Relic"),
+            new("Fire Fight","Kill two monsters to obtain item 005/006/007Get the items in the treasure box (item 007  + 014 )"),
+            new("Fire 2","Go to the second level, go through the maze and get item 010"),
+            new("Fire 3","Go to the third level, kill the monsters and get the item 012 + item 015"),
+            new("Fire Over","Return to the gate of the relic, repair the stone tablet and learn the history"),
         };
 
     List<Tuple<string, string>> WoodText =         //Text of Wood quests
         new()
         {
-            new("1","Collect the item 016 and item 017. Then interact with the stone tablet to repair it"),
-            new("1","Enter the Wood Country Relic"),
-            new("1","Collect the item 016 and item 017. Then interact with the stone tablet to repair it"),
+            new("Wood Country Deciphered","Collect the item Wood Shard and item Wood Artifact. Then interact with the stone tablet to repair it"),
+            new("Wood 1","Enter the Wood Country Relic"),
+            new("Collect","Collect the item Wood Shard and item Wood Artifact. Then interact with the stone tablet to repair it"),
+            new("Fight Monsters","Kill two monsters to obtain item Ruby/Topaz/Emerald\r\nGet the items in the treasure box (item Plant Killer  + Wood Shard )\r\n"),
+            new("Wood 2","Go to the second level, go through the maze and get item Fuel Pack "),
+            new("Wood 3","Go to the third level, kill the monsters and get the item Wood Orb + item Wood Artifact"),
+            new("Wood Over","Return to the gate of the relic, repair the stone tablet and learn the history"),
         };
 
     void Awake()
@@ -250,15 +263,15 @@ public class TaskMenu : MonoBehaviour
                 break;
             case 1:
                 currMain++;
-                if (currMain > currMaxMain) currMain = 0;
+                if (currMain > currMaxMain) currMain = currMaxMain;
                 break;
             case 2:
                 currFire++;
-                if (currFire > currMaxFire) currFire = 0;
+                if (currFire > currMaxFire) currFire = currMaxFire;
                 break;
             case 3:
                 currWood++;
-                if (currWood > currMaxWood) currWood = 0;
+                if (currWood > currMaxWood) currWood = currMaxWood;
                 break;
         }
         UpdateMenu();
