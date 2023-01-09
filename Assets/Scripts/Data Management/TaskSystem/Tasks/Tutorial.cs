@@ -71,7 +71,7 @@ class Tutorial : Story
                 subTaskText = new()
                 {
                     "Move around using WASD",
-                    "Junmp using space",
+                    "Jump using space",
                 },
             },
             new Mission
