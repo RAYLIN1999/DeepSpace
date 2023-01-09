@@ -31,3 +31,5 @@ Gameplay video URL:
 https://youtu.be/DTZngnoe17M
 
 Git LFS is used in our project.
+
+The two background images for the main menu and the credits menu were designed ourselves.
