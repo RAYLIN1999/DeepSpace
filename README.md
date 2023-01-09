@@ -1,4 +1,7 @@
 # DeepSpace
+
+ The two background images for the main menu and the credits menu were designed ourselves.
+
  For monster system, we used a model from Unity asset store.
  link: https://assetstore.unity.com/packages/3d/characters/animals/wolf-animated-45505
  
