@@ -17,7 +17,7 @@ public class Area_04_Trigger : MonoBehaviour
     public void OnTriggerEnter(Collider other)     //Enter the range of this object
 
     {
-        couldInteract = true; //Interaction can only take place when the player is in range
+        if(GameState.AIUnlocked)couldInteract = true; //Interaction can only take place when the player is in range
         UIManager.Instance.ShowCurrentStatusHint_Area_04_Trigger();
     }
 

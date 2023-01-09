@@ -172,8 +172,8 @@ public class SpaceShipAI : MonoBehaviour
 
     void Update()
     {
-        item_012_a = GameManager.Instance.item_012_amount;
-        item_013_a = GameManager.Instance.item_013_amount;
+        item_012_a = GameState.ItemAmount[11];
+        item_013_a = GameState.ItemAmount[12];
 
     }
 }

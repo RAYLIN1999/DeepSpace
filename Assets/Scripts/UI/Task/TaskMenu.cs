@@ -57,7 +57,9 @@ public class TaskMenu : MonoBehaviour
     List<Tuple<string, string>> WoodText =         //Text of Wood quests
         new()
         {
-            new("1","2"),
+            new("1","Collect the item 016 and item 017. Then interact with the stone tablet to repair it"),
+            new("1","Enter the Wood Country Relic"),
+            new("1","Collect the item 016 and item 017. Then interact with the stone tablet to repair it"),
         };
 
     void Awake()
@@ -178,6 +180,7 @@ public class TaskMenu : MonoBehaviour
     public void SetTutorialText(string _Content)
     {
         tipText = _Content;
+        UpdateTip();
     }
     /// <summary>
     /// Tutorial is a simple task that will not be documented.

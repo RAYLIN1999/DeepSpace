@@ -17,12 +17,12 @@ class Tutorial : Story
         {
             new Mission
             {
-                setup = () => { AITrigger = GameObject.Find("AITrigger"); },
-                finalize = () => { },
+                setup = () => { },
+                finalize = () => { GameObject.Find("Conversation 1").SetActive(false); },
                 subTaskCheck = new()
                 {
                     () => {
-                        if(AITrigger.GetComponent<StoryTrigger>().IsTriggered && Input.GetKeyDown(KeyCode.F))
+                        if(DialogueTrigger.Instance.couldInteract && Input.GetKeyDown(KeyCode.F))
                             missList[0].subTaskFinished[0] = true;
                     },
                 },
@@ -81,21 +81,17 @@ class Tutorial : Story
                 subTaskCheck = new()
                 {
                     () => {
-                        if(OxTank.GetComponent<StoryTrigger>().IsTriggered && Input.GetKeyDown(KeyCode.F))
+                        if(OxTank.GetComponent<StoryTrigger>().IsTriggered && GameState.ItemAmount[1]==1)
                         {
                             missList[2].subTaskFinished[0] = true;
-                            missList[2].subTaskProgress[0] = GameState.ItemAmount[1];//TODO: ID
                         }
                     },
                     () => {
-                        if(GameState.ItemAmount[1]<missList[2].subTaskProgress[0])
+                        if(GameState.ItemAmount[1]==0)
                             missList[2].subTaskFinished[1] = true; 
                     },
                 },
-               subTaskProgress = new()
-                {
-                    0
-                },
+               subTaskProgress = null,
                 subTaskFinished = new()
                 {
                     false, false
@@ -110,14 +106,11 @@ class Tutorial : Story
             {
                 setup = () => {
                     SetPriorCombatTarget((s,t,i)=>{
-                        if(s == Player.Instance.GetComponent<BasicCombatant>())
-                        {
-                            missList[3].subTaskFinished[0] = true; return true;
-                        }
-                        return false;
+                        missList[3].subTaskFinished[0] = true; 
+                        return true;
                     });
                     SetLaterCombatTarget((s,t,i,r)=>{
-                        if(s == Player.Instance.GetComponent<BasicCombatant>() && r.killed == true)
+                        if(r.killed == true)
                         {
                             missList[3].subTaskFinished[1] = true; return true;
                         }
@@ -132,10 +125,7 @@ class Tutorial : Story
                             missList[3].subTaskFinished[2] = true;
                     },
                 },
-                subTaskProgress = new()
-                {
-                    0, 0, 0
-                },
+                subTaskProgress = null,
                 subTaskFinished = new()
                 {
                     false, false, false
@@ -149,12 +139,16 @@ class Tutorial : Story
             },
             new Mission
             {
-                setup = () => { },
-                finalize = () => {},
+                setup = () => { GameState.AIUnlocked=true; },
+                finalize = () => { 
+                    GameState.StorageAreaUnlocked=true; 
+                    TaskMenu.Instance.SetTutorialTextDetail("Continue your new adventure at portal!"); 
+                    TaskMenu.Instance.SetTutorialText("Finished!"); 
+                },
                 subTaskCheck = new()
                 {
                     () => {
-                        if(AITrigger.GetComponent<StoryTrigger>().IsTriggered && Input.GetKeyDown(KeyCode.F))
+                        if(/*Area_04_Trigger.Instance.couldInteract && */Input.GetKeyDown(KeyCode.F))
                             missList[4].subTaskFinished[0] = true;
                     },
                 },
@@ -165,7 +159,7 @@ class Tutorial : Story
                 },
                 subTaskText = new()
                 {
-                   "Talk with ship AI again",
+                   "Talk with ship AI again (in ship)",
                 },
             },
         };
@@ -176,7 +170,6 @@ class Tutorial : Story
     public override Story NextStory => null;// new Main1();
 
     // Related Game Objects
-    GameObject AITrigger = null;
     GameObject OxTank = null;
 
 }

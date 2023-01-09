@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(BasicCombatant))]
 public class WeaponControl : MonoBehaviour
 {
     public Transform shootPoint;
     public int bulletsMag = 30;//Number of rounds in a magazine             一个弹匣的子弹数量
-    public int range = 100;//Shooting range                                 射程
+    public int range = 10000;//Shooting range                                 射程
     public int bulletLeft = 300;//Back-up bullets                           备弹
     public int currentBullet;//Current bullet count                         当前子弹数
 
@@ -16,7 +15,7 @@ public class WeaponControl : MonoBehaviour
 
     public float fireRate = 0.1f;//Rate of fire                 射速
     private float fireTime;//Timer                              计时器
-    private BasicCombatant myComb;
+    private BasicCombatant myComb=null;
 
     [Header("KeySet")]
     [SerializeField] private KeyCode reloadInputName;
@@ -28,7 +27,7 @@ public class WeaponControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myComb=GetComponent<BasicCombatant>();
+        myComb=Player.Instance.gameObject.GetComponent<BasicCombatant>();
         reloadInputName = KeyCode.R;
         currentBullet = bulletsMag;
         UpdateAmmoUI();

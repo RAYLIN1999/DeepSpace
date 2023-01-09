@@ -798,7 +798,9 @@ GameObject:
   - component: {fileID: 477254}
   - component: {fileID: 9547338}
   - component: {fileID: 3950255736466414901}
+  - component: {fileID: 4344319795655135567}
   - component: {fileID: 5428092734013387407}
+  - component: {fileID: 2615851174873985468}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -870,6 +872,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4344319795655135567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c6aa8e1d1d3d54ea2feccad85d246c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 0
+  attackTarget: {fileID: 0}
+  isGuard: 0
+  lookAtTime: 0
+  patrolRange: 0
+  attackTime: 0
+  HP: 15
 --- !u!114 &5428092734013387407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,6 +904,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 20
+--- !u!65 &2615851174873985468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.72, y: 1.66, z: 4.26}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &176664
 GameObject:
   m_ObjectHideFlags: 0

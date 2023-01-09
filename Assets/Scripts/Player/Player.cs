@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameState.PlayerHP = CurrentHP;
+        GameState.PlayerOx = currentOxygen;
 
         if (Input.GetKeyDown(KeyCode.K))  //Cheat button for testing, and reduce health values
         {
@@ -82,5 +84,10 @@ public class Player : MonoBehaviour
     {
         addOxygen(1);
         AudioManager.instance.Play("collect");
+    }
+
+    public BasicCombatant GetBasicCombatant()
+    {
+        return myComb;
     }
 }

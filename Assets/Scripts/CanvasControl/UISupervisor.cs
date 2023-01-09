@@ -29,6 +29,7 @@ public class UISupervisor : MonoBehaviour
     [SerializeField] private GameObject TasksMenu;                  //task menu interface
     [SerializeField] private GameObject PauseMenu;                  //pause menu interface
     [SerializeField] private GameObject BagMenu;                    //bag menu interface
+    [SerializeField] private GameObject SettingMenu;                //setting menu interface
 
     [SerializeField] private GameObject Facility_02_Panel;          //Upgrade System Interface
     [SerializeField] private GameObject Facility_03_Panel;          //Energy System Interface
@@ -68,16 +69,20 @@ public class UISupervisor : MonoBehaviour
 
     [SerializeField] private GameObject CSH_Normal_Wood_Stone;      //Current Status Hint text pop-ups triggered when approaching this object in Wood_Stone
 
+    [SerializeField] private GameObject CSH_Normal_Portal_Spaceship;//Current Status Hint text pop-ups triggered when approaching this object in Portal_Spaceship
+
+    [SerializeField] private GameObject CSH_Normal_Relics_Door;     //Current Status Hint text pop-ups triggered when approaching this object in Relics_Door
+    [SerializeField] private GameObject CSH_Disabled_Relics_Door;
 
     [SerializeField] private TMP_Text HealthPoint;                  //Text display of health value
     [SerializeField] private TMP_Text OxygenPoint;                  //Text display of oxygen value
     [SerializeField] private TMP_Text doorButtonText;               //open or close
 
-    [SerializeField] private TMP_Text item_004_amount;
+    //[SerializeField] private TMP_Text item_004_amount;
 
     //UI controllers
-    public HealthBar healthBar; //Reference script HealthBar.cs
-    public OxygenBar oxygenBar; //Reference script OxygenBar.cs
+    public HealthBar healthBar;                                     //Reference script HealthBar.cs
+    public OxygenBar oxygenBar;                                     //Reference script OxygenBar.cs
 
     // UI Control Functions
     void ShowInGameUI()                                 //display HUD, hide the menu
@@ -107,9 +112,8 @@ public class UISupervisor : MonoBehaviour
         ShowInGameUI();
         PauseMenuShowed = false;
         PauseMenu.SetActive(PauseMenuShowed);
-        
-    }
 
+    }
     public void ShowTaskMenu()                          //display task menu
     {
         HideInGameUI();                                 //Hide HUD for better visual
@@ -117,7 +121,6 @@ public class UISupervisor : MonoBehaviour
         TaskMenu.Instance.UpdateMenu();                 //Update the content
         TasksMenu.SetActive(true);
     }
-
     public void HideTaskMenu()                          //hide task menu
     {
         ShowInGameUI();
@@ -132,7 +135,6 @@ public class UISupervisor : MonoBehaviour
         BagMenu.SetActive(true);
         BagManager.Instance.Initialise_BagMenu();
     }
-
     public void HideBagMenu()                           //hide bag menu
     {
         Debug.Log("Hide BagMenu");
@@ -141,6 +143,70 @@ public class UISupervisor : MonoBehaviour
         BagMenu.SetActive(false);
         BagManager.Instance.Initialise_BagMenu();
     }
+
+    public void Show_Upgrade_Panel()                    //Show Upgrade System Interface
+    {
+        HideInGameUI();
+
+        Facility_02_Panel.SetActive(true);
+        HideInteractButton();
+
+    }
+
+    public void Hide_Upgrade_Panel()                    //Hide Upgrade System Interface
+    {
+        ShowInGameUI();
+        Facility_02_Panel.SetActive(false);
+        ShowInteractButton();
+    }
+
+    public void Show_Energy_Panel()                     //Show Energy System Interface
+    {
+        HideInGameUI();
+
+        Facility_03_Panel.SetActive(true);
+        HideInteractButton();
+
+    }
+
+    public void Hide_Energy_Panel()                     //Hide Energy System Interface
+    {
+        ShowInGameUI();
+        Facility_03_Panel.SetActive(false);
+        ShowInteractButton();
+    }
+    public void Show_AI_Panel()                         //Show SpaceAI Interface
+    {
+        HideInGameUI();
+
+        Facility_04_Panel.SetActive(true);
+        HideInteractButton();
+    }
+
+    public void Hide_AI_Panel()                         //Hide SpaceAI Interface
+    {
+        ShowInGameUI();
+        Facility_04_Panel.SetActive(false);
+        ShowInteractButton();
+        SpaceShipAI.Instance.turn_to_01_page();
+    }
+
+    public void Show_Portal_Panel()                     //Show Portal Facility Interface
+    {
+        HideInGameUI();
+
+        Facility_05_Panel.SetActive(true);
+        HideInteractButton();
+    }
+
+    public void Hide_Portal_Panel()                     //Hide Portal Facility Interface
+    {
+        ShowInGameUI();
+        Facility_05_Panel.SetActive(false);
+        ShowInteractButton();
+    }
+
+
     public void StartTalk()                             //start conversation, display dialogue interface
     {
         DialogueInterface.SetActive(true);              //Show dialogue interface
@@ -370,6 +436,38 @@ public class UISupervisor : MonoBehaviour
                 }
                 return;
             }
+
+            if (InGameUIshowed && Area_02_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 2
+                                                                            //Interaction can only take place when the player is in range
+            {
+                if (GameManager.Instance.Area_02_unlocked)
+                {
+                    Show_Upgrade_Panel();
+                }
+            }
+
+            if (InGameUIshowed && Area_03_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 3
+                                                                            //Interaction can only take place when the player is in range
+            {
+                if (GameManager.Instance.Area_03_unlocked)
+                {
+                    Show_Energy_Panel();
+                }
+            }
+
+            if (InGameUIshowed && Area_04_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 4
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Show_AI_Panel();
+            }
+
+            if (InGameUIshowed && Area_05_Trigger.Instance.couldInteract)   //Allows players to interact with the facilities in Area 5
+                                                                            //Interaction can only take place when the player is in range
+            {
+                Show_Portal_Panel();
+            }
+
+
 
         }
 

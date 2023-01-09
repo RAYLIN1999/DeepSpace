@@ -6,6 +6,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public static DialogueTrigger Instance; //Instantiating the DialogueTrigger.cs
     public Dialogue dialogue;
+    public bool couldInteract=false;
 
     void Awake()
     {
@@ -19,11 +20,13 @@ public class DialogueTrigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)     //Show button when triggered
     {
-        //UIManager.Instance.ShowStartTalkButton();
+        couldInteract = true;
+        UIManager.Instance.ShowStartTalkButton();
     }
 
     public void OnTriggerExit(Collider other) //Hide button when not triggered
     {
-        //UIManager.Instance.HideStartTalkButton();
+        couldInteract = false;
+        UIManager.Instance.HideStartTalkButton();
     }
 }

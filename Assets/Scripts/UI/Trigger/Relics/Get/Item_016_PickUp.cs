@@ -19,18 +19,19 @@ public class Item_016_PickUp : MonoBehaviour
 
     {
         couldInteract = true; //Interaction can only take place when the player is in range
-        UIManager.Instance.ShowInteractButton();
+        UIManager.Instance.ShowPickUpButton(get_016_item);
     }
 
     public void OnTriggerExit(Collider other) //Leave the range of this object
     {
         couldInteract = false;
-        UIManager.Instance.HideInteractButton();
+        UIManager.Instance.HidePickUpButton();
     }
 
     public void get_016_item()
     {
         Debug.Log("get item 016 - piece item");
-        //thisObject.SetActive(false);
+        GameState.ItemAmount[15]++;
+        gameObject.SetActive(false);
     }
 }

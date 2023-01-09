@@ -7,3 +7,5 @@ raylin1999.github.io/DeepSpace/build/index.html
 
 Gameplay video URL:
 https://youtu.be/JfSmi-Ra6rI
+
+Git LFS is used in our project.

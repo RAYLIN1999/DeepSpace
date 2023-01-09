@@ -19,18 +19,19 @@ public class Get_wood_tool_Trigger : MonoBehaviour
 
     {
         couldInteract = true; //Interaction can only take place when the player is in range
-        UIManager.Instance.ShowInteractButton();
+        UIManager.Instance.ShowPickUpButton(get_wood_tool);
     }
 
     public void OnTriggerExit(Collider other) //Leave the range of this object
     {
         couldInteract = false;
-        UIManager.Instance.HideInteractButton();
+        UIManager.Instance.HidePickUpButton();
     }
 
     public void get_wood_tool()
     {
         Debug.Log("get item 008 - wood tool");
-        //thisObject.SetActive(false);
+        GameState.ItemAmount[7]++;
+        gameObject.SetActive(false);
     }
 }

@@ -876,7 +876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3698416558231649904, guid: 16ea22e185118ce44b8896a44ebf56f4, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3698416558231649904, guid: 16ea22e185118ce44b8896a44ebf56f4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1672,6 +1672,14 @@ PrefabInstance:
     - target: {fileID: 9185775054096398139, guid: 372b27f496bbecb42bc2c61a96ebce90, type: 3}
       propertyPath: m_Name
       value: Conversation 9 Fire Stone tablet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185775054096398140, guid: 372b27f496bbecb42bc2c61a96ebce90, type: 3}
+      propertyPath: m_Size.x
+      value: 8.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185775054096398140, guid: 372b27f496bbecb42bc2c61a96ebce90, type: 3}
+      propertyPath: m_Size.z
+      value: 9.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

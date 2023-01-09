@@ -47,7 +47,7 @@ public class StoryLine : MonoBehaviour
     private bool CheckStoryFinished(Story _Story)
     {
         // check if the last mission finished in this story
-        return _Story.MissList[_Story.MissList.Count - 1].Finished;
+        return _Story.CurrentMission>= _Story.MissList.Count;
     }
     void SetupToturialMission(Mission _Miss)
     {
