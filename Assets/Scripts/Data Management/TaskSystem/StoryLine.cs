@@ -83,7 +83,7 @@ public class StoryLine : MonoBehaviour
                 }
             }
         }
-        return; //TODO: write stories
+        return;
         // check wood quests progress
         if (GameState.WoodAccessed)
         {

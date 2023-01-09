@@ -29,9 +29,9 @@ public class TaskMenu : MonoBehaviour
     [SerializeField] private string tipText;       //Short text cache
 
     // Task menu states
-    public int currMaxMain = 0;                    //the latest main quest number
-    public int currMaxFire = 0;                    //the latest fire quest number
-    public int currMaxWood = 0;                    //the latest wood quest number
+    public int currMaxMain = 7;                    //the latest main quest number
+    public int currMaxFire = 5;                    //the latest fire quest number
+    public int currMaxWood = 6;                    //the latest wood quest number
     int currMain = 0;                              //currently watching main quest number
     int currFire = 0;                              //currently watching main quest number
     int currWood = 0;                              //currently watching main quest number
@@ -274,6 +274,11 @@ public class TaskMenu : MonoBehaviour
                 if (currWood > currMaxWood) currWood = currMaxWood;
                 break;
         }
+        UpdateMenu();
+    }
+
+    public void Update()
+    {
         UpdateMenu();
     }
 }
