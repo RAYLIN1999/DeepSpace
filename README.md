@@ -28,6 +28,6 @@ Github Pages URL with Web-GL build:
 raylin1999.github.io/DeepSpace/build/index.html
 
 Gameplay video URL:
-https://youtu.be/JfSmi-Ra6rI
+https://youtu.be/DTZngnoe17M
 
 Git LFS is used in our project.
