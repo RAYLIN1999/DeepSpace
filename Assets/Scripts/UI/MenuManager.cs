@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
     public void LoadGame() //Switch scene
     {
         Debug.Log("Load game");
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 
     public void OpenSettingMenu() //Switch scene

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: NextBtn
         m_Mode: 1
@@ -13206,7 +13206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: NextBtn
         m_Mode: 1
@@ -15361,7 +15361,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: PrevBtn
         m_Mode: 1
@@ -18864,7 +18864,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: PrevBtn
         m_Mode: 1
@@ -19135,7 +19135,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: NextBtn
         m_Mode: 1
@@ -69611,7 +69611,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448142888709961172}
         m_TargetAssemblyTypeName: TaskMenu, Assembly-CSharp
         m_MethodName: PrevBtn
         m_Mode: 1
