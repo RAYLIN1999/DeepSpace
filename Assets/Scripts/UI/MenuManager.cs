@@ -109,6 +109,8 @@ public class MenuManager : MonoBehaviour
         Button_on.SetActive(true);
         Button_off.SetActive(false);
         GameState.BGM = true;
+        AudioManager.instance.Stop("environment1");
+        AudioManager.instance.Play("environment1");
     }
 
     public void set_background_music_OFF()
@@ -117,6 +119,7 @@ public class MenuManager : MonoBehaviour
         Button_on.SetActive(false);
         Button_off.SetActive(true);
         GameState.BGM = false;
+        AudioManager.instance.Stop("environment1");
     }
 
 
