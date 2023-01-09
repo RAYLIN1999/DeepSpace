@@ -31,6 +31,7 @@ public class Item_010_PickUp : MonoBehaviour
     public void get_010_item()
     {
         Debug.Log("get item 010 - task item 1");
-        //thisObject.SetActive(false);
+        GameState.ItemAmount[9]++;
+        gameObject.SetActive(false);
     }
 }

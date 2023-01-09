@@ -31,6 +31,7 @@ public class Item_014_PickUp : MonoBehaviour
     public void get_014_item()
     {
         Debug.Log("get item 014 - piece item");
-        //thisObject.SetActive(false);
+        GameState.ItemAmount[13]++;
+        gameObject.SetActive(false);
     }
 }

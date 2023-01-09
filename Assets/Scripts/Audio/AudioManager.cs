@@ -12,21 +12,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        foreach(AudioType type in AudioTypes)
+        instance = this;
+        foreach (AudioType type in AudioTypes)
         {
             type.Source = gameObject.AddComponent<AudioSource>();
 
@@ -37,6 +24,11 @@ public class AudioManager : MonoBehaviour
             type.Source.loop = type.Loop;
 
         }
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void Play(string name)

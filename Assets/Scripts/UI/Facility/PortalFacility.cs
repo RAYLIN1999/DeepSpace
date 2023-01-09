@@ -16,12 +16,14 @@ public class PortalFacility : MonoBehaviour
     public void GoTo_fire_country() //Switch scene
     {
         Debug.Log("fire country");
-        //SceneManager.LoadScene(2);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(11);
     }
 
     public void GoTo_wood_country() //Switch scene
     {
         Debug.Log("wood country");
-        //SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(4);
     }
 }

@@ -31,6 +31,7 @@ public class Get_fire_tool_Trigger : MonoBehaviour
     public void get_fire_tool()
     {
         Debug.Log("get item 007 - fire tool");
-        //thisObject.SetActive(false);
+        GameState.ItemAmount[6]++;
+        gameObject.SetActive(false);
     }
 }

@@ -23,19 +23,20 @@ public class MenuManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
 
     public void StartGame() //Switch scene
     {
         Debug.Log("Start game");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void LoadGame() //Switch scene
     {
         Debug.Log("Load game");
-        //SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void OpenSettingMenu() //Switch scene
@@ -107,7 +108,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("background music --> on");
         Button_on.SetActive(true);
         Button_off.SetActive(false);
-        //TODO    turn on music
+        GameState.BGM = true;
     }
 
     public void set_background_music_OFF()
@@ -115,7 +116,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("background music --> off");
         Button_on.SetActive(false);
         Button_off.SetActive(true);
-        //TODO   turn off music
+        GameState.BGM = false;
     }
 
 

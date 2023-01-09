@@ -12,6 +12,36 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/SettingMenu.unity
     guid: 7fec56c297c0ecd45a8b68196fa9744c
   - enabled: 1
-    path: Assets/Scenes/SPACESHIP/MainGame.unity
-    guid: 86052ed8539205d49830b199a50052f9
+    path: Assets/Scenes/Menu/Loading.unity
+    guid: 62d35cf1fa89d734cbd5dfcc0dd42126
+  - enabled: 1
+    path: Assets/Scenes/SPACESHIP/NewInShip.unity
+    guid: e296111b7244a8b41a23a1a54109ffd9
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Wood0.unity
+    guid: 57df1e417250bc247976c2c0dc088efe
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Wood1.unity
+    guid: 5f4b7b25db41c9c488f269237291cd98
+  - enabled: 1
+    path: Assets/Scenes/RELICS/wood2.unity
+    guid: e3c305a681570474c9ddf29c17e49870
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Wood3.unity
+    guid: c7a5c4d2226a35e4eb837bac1890b9ef
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Fire1.unity
+    guid: 1fb156445682faf45a24856e0c776bd0
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Fire2.unity
+    guid: b791bc3d9b029a14692929716d502bc3
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Fire3.unity
+    guid: 27915a3fb9d946e42a07fa661de8d839
+  - enabled: 1
+    path: Assets/Scenes/RELICS/Fire0.unity
+    guid: 54350ef30d7d1ec4d9f7ff0f76a6c704
+  - enabled: 1
+    path: Assets/Scenes/Menu/Credit.unity
+    guid: 111a14a0eecf5704ab85f680fd3b7736
   m_configObjects: {}

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Wood_Tool_Trigger : MonoBehaviour
 {
-    public static Wood_Tool_Trigger Instance; //Instantiating the Wood_Tool_Trigger.cs
+    public static Wood_Tool_Trigger Instance1; //Instantiating the Wood_Tool_Trigger.cs
+    public static Wood_Tool_Trigger Instance2; //Instantiating the Wood_Tool_Trigger.cs
 
     [SerializeField] public bool couldInteract = false;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance1 == null) Instance1 = this;
+        else Instance2 = this;
     }
 
 
@@ -30,6 +32,7 @@ public class Wood_Tool_Trigger : MonoBehaviour
     public void wood_tool_active()
     {
         Debug.Log("wood_tool_active");
-        //
+        if (GameState.ItemAmount[7]>0)gameObject.SetActive(false);
+        UIManager.Instance.HideInteractButton();
     }
 }

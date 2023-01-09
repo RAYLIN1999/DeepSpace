@@ -7,6 +7,7 @@ public class EnergySystem : MonoBehaviour
     public static EnergySystem Instance; //Instantiating the EnergySystem.cs
 
     [SerializeField] private GameObject button_refill;
+    [SerializeField] private GameObject win_scn;
 
     [SerializeField] private int item_012_a;
     [SerializeField] private int item_013_a;
@@ -19,6 +20,7 @@ public class EnergySystem : MonoBehaviour
 
     public void Refill_Energy()     //refill the energy
     {
+        win_scn.SetActive(true);
         if (item_012_a >= 1 && item_013_a >= 1)
         {
             Debug.Log("refill the energy");

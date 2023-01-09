@@ -157,6 +157,11 @@ public class UIManager : MonoBehaviour
         BagManager.Instance.Initialise_BagMenu();
     }
 
+    public void GotoCreditSCreen()
+    {
+        SceneManager.LoadScene(12);
+    }
+
     public void HideBagMenu()   //hide interface
     {
         Debug.Log("Hide BagMenu");
@@ -648,35 +653,40 @@ public class UIManager : MonoBehaviour
     public void ShowCurrentStatusHint_Door_Relics()   //show the current status hint of this game object
     {
         Debug.Log("Show the current status hint Door_Relics");
+        CSH_Normal_Relics_Door.SetActive(true);
+        ShowInteractButton();
+        return;
 
-        if (!GameManager.Instance.Door_Wood_0_1_unlocked)
-        {
-            CSH_Disabled_Relics_Door.SetActive(true);
-            CSH_Normal_Relics_Door.SetActive(false);
-        }
-        else
-        {
-            CSH_Disabled_Relics_Door.SetActive(false);
-            CSH_Normal_Relics_Door.SetActive(true);
-            ShowInteractButton();
-        }
+        //if (!GameManager.Instance.Door_Wood_0_1_unlocked)
+        //{
+        //    CSH_Disabled_Relics_Door.SetActive(true);
+        //    CSH_Normal_Relics_Door.SetActive(false);
+        //}
+        //else
+        //{
+        //    CSH_Disabled_Relics_Door.SetActive(false);
+        //    CSH_Normal_Relics_Door.SetActive(true);
+        //    ShowInteractButton();
+        //}
     }
 
     public void HideCurrentStatusHint_Door_Relics()   //hide the current status hint of this game object
     {
         Debug.Log("hide the current status hint Door_Relics");
+        CSH_Normal_Relics_Door.SetActive(false);
+        HideInteractButton();
 
-        if (!GameManager.Instance.Door_Wood_0_1_unlocked)
-        {
-            CSH_Normal_Relics_Door.SetActive(false);
-            CSH_Disabled_Relics_Door.SetActive(false);
-        }
-        else
-        {
-            CSH_Normal_Relics_Door.SetActive(false);
-            CSH_Disabled_Relics_Door.SetActive(false);
-            HideInteractButton();
-        }
+        //if (!GameManager.Instance.Door_Wood_0_1_unlocked)
+        //{
+        //    CSH_Normal_Relics_Door.SetActive(false);
+        //    CSH_Disabled_Relics_Door.SetActive(false);
+        //}
+        //else
+        //{
+        //    CSH_Normal_Relics_Door.SetActive(false);
+        //    CSH_Disabled_Relics_Door.SetActive(false);
+        //    HideInteractButton();
+        //}
     }
 
     public void show_setting_menu_interface()
@@ -870,28 +880,34 @@ public class UIManager : MonoBehaviour
                                                                             //Interaction can only take place when the player is in range
             {
                 Debug.Log("Back to spaceship");
-                //MenuManager.Instance.LoadGame();    //switch to spaceship scene
+                MenuManager.Instance.LoadGame();    //switch to spaceship scene
             }
 
             if (InGameUIshowed && Fire_Tool_Trigger.Instance != null ? Fire_Tool_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                           //Interaction can only take place when the player is in range
             {
                 Debug.Log("active fire tool");
-                //Fire_Tool_Trigger.Instance.fire_tool_active();    //active fire tool
+                Fire_Tool_Trigger.Instance.fire_tool_active();    //active fire tool
             }
 
-            if (InGameUIshowed && Wood_Tool_Trigger.Instance != null ? Wood_Tool_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
+            if (InGameUIshowed && Wood_Tool_Trigger.Instance1 != null ? Wood_Tool_Trigger.Instance1.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                               //Interaction can only take place when the player is in range
             {
                 Debug.Log("active wood tool");
-                //Wood_Tool_Trigger.Instance.fire_tool_active();    //active wood tool
+                Wood_Tool_Trigger.Instance1.wood_tool_active();    //active wood tool
+            }
+            if (InGameUIshowed && Wood_Tool_Trigger.Instance2 != null ? Wood_Tool_Trigger.Instance2.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
+                                                                                                                             //Interaction can only take place when the player is in range
+            {
+                Debug.Log("active wood tool");
+                Wood_Tool_Trigger.Instance2.wood_tool_active();    //active wood tool
             }
 
-            if(InGameUIshowed && Get_fire_tool_Trigger.Instance != null ? Get_fire_tool_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
+            if (InGameUIshowed && Get_fire_tool_Trigger.Instance != null ? Get_fire_tool_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                           //Interaction can only take place when the player is in range
             {
                 Debug.Log("get fire tool");
-                //Get_fire_tool_Trigger.Instance.get_fire_tool();    //get fire tool
+                Get_fire_tool_Trigger.Instance.get_fire_tool();    //get fire tool
             }
 
             if (InGameUIshowed && Get_wood_tool_Trigger.Instance != null ? Get_wood_tool_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
@@ -905,7 +921,7 @@ public class UIManager : MonoBehaviour
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("get item 010");
-                //Item_010_PickUp.Instance.get_010_item();    //get item 010
+                Item_010_PickUp.Instance.get_010_item();    //get item 010
             }
 
             if (InGameUIshowed && Item_011_PickUp.Instance != null ? Item_011_PickUp.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
@@ -919,7 +935,7 @@ public class UIManager : MonoBehaviour
                                                                             //Interaction can only take place when the player is in range
             {
                 Debug.Log("get item 014");
-                //Item_014_PickUp.Instance.get_014_item();    //get item 014
+                Item_014_PickUp.Instance.get_014_item();    //get item 014
             }
 
             if (InGameUIshowed && Item_016_PickUp.Instance != null ? Item_016_PickUp.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
@@ -931,60 +947,60 @@ public class UIManager : MonoBehaviour
 
 
 
-            if (InGameUIshowed && Wood_0_1_Door_Trigger.Instance != null ? Wood_0_1_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
-                                                                              //Interaction can only take place when the player is in range
-            {
-                Debug.Log("wood ralics 0 --> 1");
-                //SceneManager.LoadScene(2);                   //swtich scene
-            }
+            //if (InGameUIshowed && Wood_0_1_Door_Trigger.Instance != null ? Wood_0_1_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
+            //                                                                  //Interaction can only take place when the player is in range
+            //{
+            //    Debug.Log("wood ralics 0 --> 1");
+            //    //SceneManager.LoadScene(2);                   //swtich scene
+            //}
 
             if (InGameUIshowed && Wood_1_2_Door_Trigger.Instance != null ? Wood_1_2_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("wood ralics 1 --> 2");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(6);                   //swtich scene
             }
 
             if (InGameUIshowed && Wood_2_3_Door_Trigger.Instance != null ? Wood_2_3_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("wood ralics 2 --> 3");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(7);                   //swtich scene
             }
 
             if (InGameUIshowed && Wood_3_0_Door_Trigger.Instance != null ? Wood_3_0_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("wood ralics 3 --> 0");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(5);                   //swtich scene
             }
 
-            if (InGameUIshowed && Fire_0_1_Door_Trigger.Instance != null ? Fire_0_1_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
-                                                                                  //Interaction can only take place when the player is in range
-            {
-                Debug.Log("Fire ralics 0 --> 1");
-                //SceneManager.LoadScene(2);                   //swtich scene
-            }
+            //if (InGameUIshowed && Fire_0_1_Door_Trigger.Instance != null ? Fire_0_1_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
+            //                                                                      //Interaction can only take place when the player is in range
+            //{
+            //    Debug.Log("Fire ralics 0 --> 1");
+            //    //SceneManager.LoadScene(2);                   //swtich scene
+            //}
 
             if (InGameUIshowed && Fire_1_2_Door_Trigger.Instance != null ? Fire_1_2_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("Fire ralics 1 --> 2");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(9);                   //swtich scene
             }
 
             if (InGameUIshowed && Fire_2_3_Door_Trigger.Instance != null ? Fire_2_3_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("Fire ralics 2 --> 3");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(10);                   //swtich scene
             }
 
             if (InGameUIshowed && Fire_3_0_Door_Trigger.Instance != null ? Fire_3_0_Door_Trigger.Instance.couldInteract : false)   //Allows players to interact with the facilities in portal_backtoship
                                                                                   //Interaction can only take place when the player is in range
             {
                 Debug.Log("Fire ralics 3 --> 0");
-                //SceneManager.LoadScene(2);                   //swtich scene
+                SceneManager.LoadScene(8);                   //swtich scene
             }
 
             if (DialogueTrigger.Instance != null ? DialogueTrigger.Instance.couldInteract : false)

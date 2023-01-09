@@ -114,9 +114,9 @@ public class UpgradeSystem : MonoBehaviour
 
     void Update()
     {
-        item_004_a = GameManager.Instance.item_004_amount;       //get value from gamemanager.cs
-        item_005_a = GameManager.Instance.item_005_amount;
-        item_006_a = GameManager.Instance.item_006_amount;
+        item_004_a = GameState.ItemAmount[3];       //get value from gamemanager.cs
+        item_005_a = GameState.ItemAmount[4];
+        item_006_a = GameState.ItemAmount[5];
 
         if (GameManager.Instance.Equipment_01_Upgrades) //If the equipment has not been upgraded, the button is displayed
         {

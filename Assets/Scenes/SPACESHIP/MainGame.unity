@@ -63859,6 +63859,7 @@ MonoBehaviour:
     - "Players: \nIs it safe outside the ship?"
     - "Eva(AI): \nI've checked the outside and everything is fine"
     - "Players: \nOK, let's take a look outside"
+  couldInteract: 0
 --- !u!1 &1615742664
 GameObject:
   m_ObjectHideFlags: 0
@@ -87150,6 +87151,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141225940}
   m_CullTransparentMesh: 1
+--- !u!1001 &1419710622417787190
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697998833101816624, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851513081282622549, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
+      propertyPath: m_Name
+      value: BGM
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: e81330f859e7a2f45ad69a050de29b6e, type: 3}
 --- !u!1001 &1671292354472292854
 PrefabInstance:
   m_ObjectHideFlags: 0
